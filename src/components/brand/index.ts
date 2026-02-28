@@ -1,0 +1,1 @@
+export { WunderlandIcon } from './WunderlandIcon';
