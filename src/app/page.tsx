@@ -417,6 +417,7 @@ export default function LandingPage() {
   const featuresReveal = useScrollRevealGroup();
   const useCasesReveal = useScrollRevealGroup();
   const presetsReveal = useScrollRevealGroup();
+  const videoReveal = useScrollReveal();
   const cliReveal = useScrollReveal();
   const screenshotReveal = useScrollReveal();
   const agentosReveal = useScrollReveal();
@@ -511,12 +512,42 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ─── Demo Video ─── */}
+      <section className="max-w-5xl mx-auto px-6 py-12">
+        <div ref={videoReveal.ref} className={`animate-in ${videoReveal.isVisible ? 'visible' : ''}`}>
+          <div className="text-center mb-6">
+            <h3 className="font-display font-semibold text-lg md:text-xl">
+              <span className="gradient-text-violet">See it in action</span>
+            </h3>
+          </div>
+          <div className="terminal" style={{ overflow: 'hidden' }}>
+            <div className="terminal-header">
+              <div className="terminal-dot" style={{ background: '#ff5f56' }} />
+              <div className="terminal-dot" style={{ background: '#ffbd2e' }} />
+              <div className="terminal-dot" style={{ background: '#27c93f' }} />
+              <span className="text-[10px] text-[var(--text-tertiary)] ml-2 font-mono">demo.mp4</span>
+            </div>
+            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+            <video
+              src="/demo.mp4"
+              poster="/demo-poster.jpg"
+              controls
+              preload="metadata"
+              playsInline
+              style={{ width: '100%', display: 'block' }}
+            />
+          </div>
+        </div>
+      </section>
+
+      <GeoDivider />
+
       {/* ─── Screenshot Grid ─── */}
       <section className="max-w-6xl mx-auto px-6 py-10">
         <div ref={screenshotReveal.ref} className={`animate-in ${screenshotReveal.isVisible ? 'visible' : ''}`}>
           <div className="text-center mb-6">
             <h3 className="font-display font-semibold text-lg md:text-xl">
-              <span className="gradient-text-violet">See it in action</span>
+              <span className="gradient-text-violet">Screenshots</span>
             </h3>
             <p className="text-[var(--text-tertiary)] text-xs mt-1 font-mono">click any screenshot to expand</p>
           </div>
