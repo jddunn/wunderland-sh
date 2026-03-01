@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { WunderlandIcon } from '@/components/brand';
+import { WunderlandIcon, RabbitHoleIcon } from '@/components/brand';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { useScrollReveal, useScrollRevealGroup } from '@/lib/useScrollReveal';
 import { useTilt } from '@/lib/useTilt';
 
@@ -230,6 +231,105 @@ function HeroParticles() {
 }
 
 /* ============================================================
+   Screenshot Carousel
+   ============================================================ */
+
+const SCREENSHOTS = [
+  {
+    title: 'Agent Chat Interface',
+    caption: 'wunderland chat — Interactive conversation with HEXACO personality, mood tracking, and real-time tool usage',
+    placeholder: true,
+    color: 'var(--primary-light)',
+  },
+  {
+    title: 'Setup Wizard',
+    caption: 'wunderland setup — Choose presets, LLM providers, skills, security tiers, and messaging channels',
+    placeholder: true,
+    color: 'var(--accent)',
+  },
+  {
+    title: 'Agent Dashboard',
+    caption: 'wunderland status — Live agent metrics, memory usage, active channels, and task queue',
+    placeholder: true,
+    color: 'var(--emerald)',
+  },
+  {
+    title: 'Security Audit Log',
+    caption: 'wunderland audit — 5-tier prompt injection defense pipeline with real-time threat classification',
+    placeholder: true,
+    color: 'var(--rose)',
+  },
+  {
+    title: 'Multi-Agent Agency',
+    caption: 'wunderland agency — Orchestrate teams of agents with shared memory and coordinated tasks',
+    placeholder: true,
+    color: 'var(--cyan)',
+  },
+];
+
+function ScreenshotCarousel() {
+  const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  React.useEffect(() => {
+    if (paused) return;
+    const timer = setInterval(() => setCurrent(c => (c + 1) % SCREENSHOTS.length), 5000);
+    return () => clearInterval(timer);
+  }, [paused]);
+
+  const slide = SCREENSHOTS[current];
+
+  return (
+    <div className="screenshot-carousel" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+      <div className="screenshot-frame">
+        <div className="screenshot-header">
+          <div className="terminal-dot" style={{ background: '#ff5f56' }} />
+          <div className="terminal-dot" style={{ background: '#ffbd2e' }} />
+          <div className="terminal-dot" style={{ background: '#27c93f' }} />
+          <span className="text-[10px] text-[var(--text-tertiary)] ml-2 font-mono">{slide.title}</span>
+        </div>
+        <div className="screenshot-body">
+          {/* Placeholder TUI mockup — replace with actual screenshots */}
+          <div className="w-full h-full flex flex-col items-center justify-center p-8 font-mono text-sm">
+            <div className="mb-4 opacity-20">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke={slide.color} strokeWidth="1.5">
+                <rect x="2" y="3" width="20" height="14" rx="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+            </div>
+            <div className="text-center space-y-2">
+              <div style={{ color: slide.color }} className="text-base font-semibold">{slide.title}</div>
+              <div className="text-[var(--text-tertiary)] text-xs max-w-md">Screenshot coming soon — run <span style={{ color: 'var(--accent)' }}>wunderland</span> to see it live</div>
+            </div>
+          </div>
+        </div>
+        <div className="screenshot-caption">
+          <span style={{ color: slide.color }}>$</span> {slide.caption}
+        </div>
+      </div>
+
+      <button type="button" className="carousel-nav carousel-nav--prev"
+        onClick={() => setCurrent(c => (c - 1 + SCREENSHOTS.length) % SCREENSHOTS.length)}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6" /></svg>
+      </button>
+      <button type="button" className="carousel-nav carousel-nav--next"
+        onClick={() => setCurrent(c => (c + 1) % SCREENSHOTS.length)}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 6 15 12 9 18" /></svg>
+      </button>
+
+      <div className="carousel-dots">
+        {SCREENSHOTS.map((_, i) => (
+          <button key={i} type="button"
+            className={`carousel-dot ${i === current ? 'carousel-dot--active' : ''}`}
+            onClick={() => setCurrent(i)} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
    Main Page
    ============================================================ */
 
@@ -240,6 +340,8 @@ export default function LandingPage() {
   const useCasesReveal = useScrollRevealGroup();
   const presetsReveal = useScrollRevealGroup();
   const cliReveal = useScrollReveal();
+  const screenshotReveal = useScrollReveal();
+  const agentosReveal = useScrollReveal();
   const ctaReveal = useScrollReveal();
 
   return (
@@ -248,7 +350,7 @@ export default function LandingPage() {
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[var(--bg-void)]/80 border-b border-[var(--border-glass)]">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
           <a href="/" className="flex items-center gap-2.5">
-            <WunderlandIcon size={28} />
+            <RabbitHoleIcon size={28} />
             <span className="font-display font-bold text-sm tracking-wide">WUNDERLAND</span>
           </a>
           <div className="flex items-center gap-4 text-xs font-mono">
@@ -259,6 +361,12 @@ export default function LandingPage() {
               className="px-3 py-1.5 rounded-lg bg-[rgba(99,102,241,0.12)] border border-[rgba(99,102,241,0.25)] text-[var(--primary-light)] hover:bg-[rgba(99,102,241,0.2)] transition-all">
               npm
             </a>
+            <a href="https://rabbithole.inc" target="_blank" rel="noopener noreferrer"
+              className="nav-rabbithole-btn">
+              <RabbitHoleIcon size={16} />
+              <span>Try the UI</span>
+            </a>
+            <ThemeToggle />
           </div>
         </div>
       </nav>
@@ -268,7 +376,7 @@ export default function LandingPage() {
         <HeroParticles />
         <div ref={heroReveal.ref} className={`relative z-10 text-center animate-in ${heroReveal.isVisible ? 'visible' : ''}`}>
           <div className="mb-6">
-            <WunderlandIcon size={80} />
+            <RabbitHoleIcon size={80} />
           </div>
 
           <h1 className="font-display font-bold text-5xl sm:text-6xl md:text-8xl tracking-tight mb-4">
@@ -471,6 +579,24 @@ export default function LandingPage() {
 
       <GeoDivider />
 
+      {/* ─── Screenshot Carousel ─── */}
+      <section className="max-w-4xl mx-auto px-6 py-20">
+        <div ref={screenshotReveal.ref} className={`animate-in ${screenshotReveal.isVisible ? 'visible' : ''}`}>
+          <div className="text-center mb-10">
+            <div className="text-xs font-mono tracking-[0.3em] uppercase text-[var(--primary-light)] mb-3">See it in action</div>
+            <h2 className="font-display font-bold text-3xl md:text-4xl mb-4">
+              <span className="gradient-text-violet">Terminal-Native Interface</span>
+            </h2>
+            <p className="text-[var(--text-secondary)] text-base max-w-2xl mx-auto leading-relaxed">
+              A TUI designed for power users. Configure, chat, monitor, and audit — all from your terminal.
+            </p>
+          </div>
+          <ScreenshotCarousel />
+        </div>
+      </section>
+
+      <GeoDivider />
+
       {/* ─── Integration Numbers ─── */}
       <section className="max-w-5xl mx-auto px-6 py-20">
         <div className="gradient-border p-8 md:p-12">
@@ -520,10 +646,83 @@ export default function LandingPage() {
 
       <GeoDivider />
 
+      {/* ─── Built on AgentOS ─── */}
+      <section className="max-w-5xl mx-auto px-6 py-20">
+        <div ref={agentosReveal.ref} className={`animate-in ${agentosReveal.isVisible ? 'visible' : ''}`}>
+          <div className="agentos-banner p-8 md:p-12">
+            <div className="relative z-10">
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-8">
+                <div className="flex-1">
+                  <div className="agentos-badge mb-4">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" />
+                    </svg>
+                    Built on AgentOS
+                  </div>
+                  <h2 className="font-display font-bold text-2xl md:text-3xl mb-3">
+                    <span className="text-[var(--text-primary)]">Powered by </span>
+                    <span style={{ color: 'var(--emerald)' }}>AgentOS</span>
+                  </h2>
+                  <p className="text-[var(--text-secondary)] text-sm md:text-base leading-relaxed max-w-2xl">
+                    Wunderland is built on <strong>AgentOS</strong> — an open-source operating system for autonomous AI agents.
+                    AgentOS provides the core runtime, tool orchestration, capability discovery, channel routing, and memory management
+                    that Wunderland extends with HEXACO personalities, security tiers, and 51+ extensions.
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <a href="https://github.com/framersai/agentos" target="_blank" rel="noopener noreferrer"
+                  className="glass-card p-4 flex items-center gap-3 group">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-[rgba(16,185,129,0.1)]">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-[var(--emerald)]">
+                      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="font-display font-semibold text-sm text-[var(--text-primary)] group-hover:text-[var(--emerald)] transition-colors">Source Code</div>
+                    <div className="text-[10px] font-mono text-[var(--text-tertiary)]">github.com/framersai/agentos</div>
+                  </div>
+                </a>
+
+                <a href="https://docs.agentos.sh" target="_blank" rel="noopener noreferrer"
+                  className="glass-card p-4 flex items-center gap-3 group">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-[rgba(99,102,241,0.1)]">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary-light)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="font-display font-semibold text-sm text-[var(--text-primary)] group-hover:text-[var(--primary-light)] transition-colors">Documentation</div>
+                    <div className="text-[10px] font-mono text-[var(--text-tertiary)]">docs.agentos.sh</div>
+                  </div>
+                </a>
+
+                <a href="https://agentos.sh" target="_blank" rel="noopener noreferrer"
+                  className="glass-card p-4 flex items-center gap-3 group">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-[rgba(245,158,11,0.1)]">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" />
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="font-display font-semibold text-sm text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">AgentOS Website</div>
+                    <div className="text-[10px] font-mono text-[var(--text-tertiary)]">agentos.sh</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <GeoDivider />
+
       {/* ─── Final CTA ─── */}
       <section className="max-w-4xl mx-auto px-6 py-24 text-center">
         <div ref={ctaReveal.ref} className={`animate-in ${ctaReveal.isVisible ? 'visible' : ''}`}>
-          <WunderlandIcon size={64} className="mx-auto mb-6" />
+          <RabbitHoleIcon size={64} className="mx-auto mb-6" />
           <h2 className="font-display font-bold text-3xl md:text-5xl mb-6">
             <span className="gradient-text">Build Something Autonomous</span>
           </h2>
@@ -560,7 +759,7 @@ export default function LandingPage() {
       <footer className="border-t border-[var(--border-glass)] py-10 px-6">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <WunderlandIcon size={20} />
+            <RabbitHoleIcon size={20} />
             <span className="font-display font-semibold text-xs text-[var(--text-tertiary)]">WUNDERLAND</span>
           </div>
           <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[var(--text-tertiary)]">
@@ -570,6 +769,9 @@ export default function LandingPage() {
             <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">npm</a>
             <a href="https://discord.gg/KxF9b6HY6h" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Discord</a>
             <a href="https://rabbithole.inc" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Rabbit Hole</a>
+            <span className="text-[var(--border-glass)]">|</span>
+            <a href="https://agentos.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--emerald)] transition-colors">AgentOS</a>
+            <a href="https://docs.agentos.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--emerald)] transition-colors">AgentOS Docs</a>
           </div>
           <div className="text-xs text-[var(--text-tertiary)]">
             MIT License &middot; Built by AI agents
