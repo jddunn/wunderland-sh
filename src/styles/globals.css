@@ -46,32 +46,33 @@
 
 /* ---- Light Mode ---- */
 html.light {
-  --bg-void: #f5f3ff;
-  --bg-surface: #ede9fe;
-  --bg-elevated: #ddd6fe;
-  --bg-glass: rgba(99, 102, 241, 0.05);
-  --bg-glass-hover: rgba(99, 102, 241, 0.09);
+  /* Muted parchment / bronze palette — NOT bright */
+  --bg-void: #e0d5c1;
+  --bg-surface: #d6c9b3;
+  --bg-elevated: #cbbda5;
+  --bg-glass: rgba(120, 90, 40, 0.07);
+  --bg-glass-hover: rgba(120, 90, 40, 0.12);
 
-  --text-primary: #1e1b4b;
-  --text-secondary: rgba(30, 27, 75, 0.72);
-  --text-tertiary: rgba(30, 27, 75, 0.50);
+  --text-primary: #1a1008;
+  --text-secondary: rgba(26, 16, 8, 0.75);
+  --text-tertiary: rgba(26, 16, 8, 0.50);
 
-  --border-glass: rgba(99, 102, 241, 0.15);
-  --border-glow: rgba(99, 102, 241, 0.45);
+  --border-glass: rgba(120, 90, 40, 0.20);
+  --border-glow: rgba(166, 124, 64, 0.50);
 
-  --primary: #4f46e5;
-  --primary-light: #4338ca;
-  --primary-dark: #3730a3;
+  --primary: #6b4f20;
+  --primary-light: #7a5a18;
+  --primary-dark: #4a3815;
 
-  --accent: #d97706;
-  --accent-light: #b45309;
-  --accent-dark: #92400e;
+  --accent: #a07208;
+  --accent-light: #876006;
+  --accent-dark: #6e4e05;
 
-  --emerald: #059669;
-  --rose: #e11d48;
-  --cyan: #0891b2;
+  --emerald: #047857;
+  --rose: #b02a25;
+  --cyan: #0c6b82;
 
-  --deco-gold: #d97706;
+  --deco-gold: #a07208;
 
   color-scheme: light;
 }
@@ -81,46 +82,46 @@ html.light body {
 }
 
 html.light body::before {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.012'/%3E%3C/svg%3E");
 }
 
 html.light body::after {
   background:
-    radial-gradient(ellipse 600px 400px at 20% 20%, rgba(99, 102, 241, 0.06), transparent),
-    radial-gradient(ellipse 500px 350px at 80% 60%, rgba(139, 92, 246, 0.04), transparent),
-    radial-gradient(ellipse 400px 300px at 50% 90%, rgba(245, 158, 11, 0.03), transparent);
+    radial-gradient(ellipse 600px 400px at 20% 20%, rgba(120, 90, 40, 0.08), transparent),
+    radial-gradient(ellipse 500px 350px at 80% 60%, rgba(166, 124, 64, 0.06), transparent),
+    radial-gradient(ellipse 400px 300px at 50% 90%, rgba(100, 70, 30, 0.05), transparent);
 }
 
 html.light .glass-card {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.35);
   backdrop-filter: blur(12px);
-  border-color: rgba(99, 102, 241, 0.12);
-  box-shadow: 0 1px 3px rgba(30, 27, 75, 0.06);
+  border-color: rgba(120, 90, 40, 0.16);
+  box-shadow: 0 1px 3px rgba(26, 16, 8, 0.08);
 }
 
 html.light .glass-card::before {
   background: linear-gradient(135deg,
-    rgba(99, 102, 241, 0.04),
-    rgba(139, 92, 246, 0.02),
+    rgba(184, 134, 11, 0.04),
+    rgba(166, 124, 64, 0.02),
     transparent
   );
 }
 
 html.light .glass-card:hover {
-  border-color: rgba(99, 102, 241, 0.3);
+  border-color: rgba(166, 124, 64, 0.3);
   box-shadow:
-    0 4px 12px rgba(99, 102, 241, 0.08),
-    0 1px 3px rgba(30, 27, 75, 0.06);
+    0 4px 12px rgba(184, 134, 11, 0.08),
+    0 1px 3px rgba(44, 29, 14, 0.06);
 }
 
 html.light .terminal {
-  background: #1e1b4b;
-  border-color: rgba(99, 102, 241, 0.3);
+  background: #1a1408;
+  border-color: rgba(166, 124, 64, 0.3);
 }
 
 html.light .terminal-header {
-  background: rgba(99, 102, 241, 0.15);
-  border-bottom-color: rgba(99, 102, 241, 0.2);
+  background: rgba(166, 124, 64, 0.15);
+  border-bottom-color: rgba(166, 124, 64, 0.2);
 }
 
 html.light .terminal-body .cmd,
@@ -133,18 +134,18 @@ html.light .terminal-body .prompt {
 
 html.light .hero-glow {
   text-shadow:
-    0 0 30px rgba(99, 102, 241, 0.15),
-    0 0 60px rgba(99, 102, 241, 0.08);
+    0 0 30px rgba(184, 134, 11, 0.18),
+    0 0 60px rgba(166, 124, 64, 0.08);
 }
 
 html.light .shimmer-text {
   background: linear-gradient(
     90deg,
-    #4338ca 0%,
-    #d97706 25%,
-    #4338ca 50%,
-    #d97706 75%,
-    #4338ca 100%
+    #7c5c2e 0%,
+    #b8860b 25%,
+    #7c5c2e 50%,
+    #b8860b 75%,
+    #7c5c2e 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -153,32 +154,32 @@ html.light .shimmer-text {
 }
 
 html.light .gradient-text {
-  background: linear-gradient(135deg, #4338ca, #b45309);
+  background: linear-gradient(135deg, #7c5c2e, #b8860b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 html.light .gradient-text-violet {
-  background: linear-gradient(135deg, #4338ca, #7c3aed, #a855f7);
+  background: linear-gradient(135deg, #7c5c2e, #a67c40, #c49a52);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 html.light .gradient-border::before {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.15), rgba(245, 158, 11, 0.1));
+  background: linear-gradient(135deg, rgba(166, 124, 64, 0.25), rgba(184, 134, 11, 0.15), rgba(139, 90, 43, 0.1));
 }
 
 html.light .copy-btn {
   background: rgba(255, 255, 255, 0.7);
-  border-color: rgba(99, 102, 241, 0.15);
+  border-color: rgba(166, 124, 64, 0.15);
   color: var(--text-tertiary);
 }
 
 html.light .particle {
   background: var(--primary);
-  opacity: 0.08;
+  opacity: 0.06;
 }
 
 html.light .deco-section-divider line {
@@ -273,7 +274,7 @@ html.light .deco-section-divider line {
 
 .screenshot-body {
   position: relative;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -284,7 +285,7 @@ html.light .deco-section-divider line {
 .screenshot-body img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: opacity 0.5s ease;
 }
 
@@ -384,37 +385,43 @@ html.light .deco-section-divider line {
 }
 
 html.light .screenshot-frame {
-  background: #faf9ff;
-  border-color: rgba(99, 102, 241, 0.2);
-  box-shadow: 0 4px 16px rgba(30, 27, 75, 0.06);
+  background: #d6c9b3;
+  border-color: rgba(120, 90, 40, 0.25);
+  box-shadow: 0 4px 16px rgba(26, 16, 8, 0.08);
 }
 
 html.light .screenshot-frame::before {
-  opacity: 0.3;
+  background: linear-gradient(135deg,
+    rgba(184, 134, 11, 0.3),
+    rgba(166, 124, 64, 0.2),
+    rgba(139, 90, 43, 0.15),
+    rgba(184, 134, 11, 0.25)
+  );
+  opacity: 0.4;
 }
 
 html.light .screenshot-header {
-  background: rgba(99, 102, 241, 0.05);
+  background: rgba(166, 124, 64, 0.06);
 }
 
 html.light .screenshot-body {
-  background: #f0eeff;
+  background: #cbbda5;
 }
 
 html.light .agentos-banner {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.04), rgba(99, 102, 241, 0.03), rgba(16, 185, 129, 0.04));
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.04), rgba(166, 124, 64, 0.03), rgba(16, 185, 129, 0.04));
   border-color: rgba(16, 185, 129, 0.12);
 }
 
 html.light .carousel-nav {
   background: rgba(255, 255, 255, 0.8);
-  border-color: rgba(99, 102, 241, 0.2);
+  border-color: rgba(166, 124, 64, 0.2);
   color: var(--text-primary);
 }
 
 html.light .nav-rabbithole-btn {
-  background: linear-gradient(135deg, rgba(217, 119, 6, 0.1), rgba(180, 83, 9, 0.06));
-  border-color: rgba(217, 119, 6, 0.25);
+  background: linear-gradient(135deg, rgba(184, 134, 11, 0.1), rgba(166, 124, 64, 0.06));
+  border-color: rgba(184, 134, 11, 0.25);
 }
 
 html {

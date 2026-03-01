@@ -236,33 +236,33 @@ function HeroParticles() {
 
 const SCREENSHOTS = [
   {
-    title: 'Agent Chat Interface',
-    caption: 'wunderland chat — Interactive conversation with HEXACO personality, mood tracking, and real-time tool usage',
-    placeholder: true,
+    title: 'Help & Commands',
+    caption: 'wunderland help — 28 CLI commands including setup, chat, start, skills, models, seal, presets, and more',
+    image: '/screenshots/help.png',
     color: 'var(--primary-light)',
   },
   {
-    title: 'Setup Wizard',
-    caption: 'wunderland setup — Choose presets, LLM providers, skills, security tiers, and messaging channels',
-    placeholder: true,
+    title: 'Agent Presets',
+    caption: 'wunderland presets — 8 pre-configured agent archetypes with HEXACO personalities, security tiers, and curated skills',
+    image: '/screenshots/presets.png',
     color: 'var(--accent)',
   },
   {
-    title: 'Agent Dashboard',
-    caption: 'wunderland status — Live agent metrics, memory usage, active channels, and task queue',
-    placeholder: true,
+    title: 'Skills Registry',
+    caption: 'wunderland skills — 18 curated SKILL.md files including web-scraper, deep-research, social-broadcast, and coding-agent',
+    image: '/screenshots/skills.png',
     color: 'var(--emerald)',
   },
   {
-    title: 'Security Audit Log',
-    caption: 'wunderland audit — 5-tier prompt injection defense pipeline with real-time threat classification',
-    placeholder: true,
+    title: 'LLM Providers',
+    caption: 'wunderland models — 13 LLM providers from OpenAI and Anthropic to Ollama for fully offline self-hosted agents',
+    image: '/screenshots/models.png',
     color: 'var(--rose)',
   },
   {
-    title: 'Multi-Agent Agency',
-    caption: 'wunderland agency — Orchestrate teams of agents with shared memory and coordinated tasks',
-    placeholder: true,
+    title: 'Messaging Channels',
+    caption: 'wunderland channels — 28 messaging channels including Telegram, WhatsApp, Discord, Slack, Email, SMS, and more',
+    image: '/screenshots/channels.png',
     color: 'var(--cyan)',
   },
 ];
@@ -289,20 +289,8 @@ function ScreenshotCarousel() {
           <span className="text-[10px] text-[var(--text-tertiary)] ml-2 font-mono">{slide.title}</span>
         </div>
         <div className="screenshot-body">
-          {/* Placeholder TUI mockup — replace with actual screenshots */}
-          <div className="w-full h-full flex flex-col items-center justify-center p-8 font-mono text-sm">
-            <div className="mb-4 opacity-20">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke={slide.color} strokeWidth="1.5">
-                <rect x="2" y="3" width="20" height="14" rx="2" />
-                <line x1="8" y1="21" x2="16" y2="21" />
-                <line x1="12" y1="17" x2="12" y2="21" />
-              </svg>
-            </div>
-            <div className="text-center space-y-2">
-              <div style={{ color: slide.color }} className="text-base font-semibold">{slide.title}</div>
-              <div className="text-[var(--text-tertiary)] text-xs max-w-md">Screenshot coming soon — run <span style={{ color: 'var(--accent)' }}>wunderland</span> to see it live</div>
-            </div>
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={slide.image} alt={slide.title} />
         </div>
         <div className="screenshot-caption">
           <span style={{ color: slide.color }}>$</span> {slide.caption}
@@ -355,7 +343,6 @@ export default function LandingPage() {
           </a>
           <div className="flex items-center gap-4 text-xs font-mono">
             <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer" className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors">Docs</a>
-            <a href="https://sol.wunderland.sh" target="_blank" rel="noopener noreferrer" className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors">ON SOL</a>
             <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer" className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors">GitHub</a>
             <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer"
               className="px-3 py-1.5 rounded-lg bg-[rgba(99,102,241,0.12)] border border-[rgba(99,102,241,0.25)] text-[var(--primary-light)] hover:bg-[rgba(99,102,241,0.2)] transition-all">
@@ -364,7 +351,7 @@ export default function LandingPage() {
             <a href="https://rabbithole.inc" target="_blank" rel="noopener noreferrer"
               className="nav-rabbithole-btn">
               <RabbitHoleIcon size={16} />
-              <span>Try the UI</span>
+              <span>Try the Web UI</span>
             </a>
             <ThemeToggle />
           </div>
@@ -390,7 +377,9 @@ export default function LandingPage() {
           </p>
 
           <p className="text-[var(--text-tertiary)] text-sm font-mono mb-10">
-            Free &amp; open-source OpenClaw fork with 5-tier security, HEXACO personalities, and AgentOS integrations.
+            Free &amp; open-source. Integrated with{' '}
+            <a href="https://docs.agentos.sh" target="_blank" rel="noopener noreferrer" className="text-[var(--emerald)] hover:underline">AgentOS</a>{' '}
+            for autonomous agentic planning &amp; personality. Self-host locally with Ollama — fully offline.
           </p>
 
           {/* Install command */}
@@ -412,10 +401,6 @@ export default function LandingPage() {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" /></svg>
               View Source
             </a>
-            <a href="https://sol.wunderland.sh" target="_blank" rel="noopener noreferrer"
-              className="px-6 py-3 rounded-xl font-display font-semibold text-sm border border-[rgba(245,158,11,0.25)] text-[var(--accent)] hover:bg-[rgba(245,158,11,0.08)] transition-all">
-              Wunderland ON SOL
-            </a>
           </div>
         </div>
       </section>
@@ -432,6 +417,18 @@ export default function LandingPage() {
               <div className="text-[var(--text-tertiary)] text-xs font-mono uppercase tracking-[0.2em] mt-1">{stat.label}</div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ─── Screenshot Carousel (compact) ─── */}
+      <section className="max-w-3xl mx-auto px-6 py-8">
+        <div ref={screenshotReveal.ref} className={`animate-in ${screenshotReveal.isVisible ? 'visible' : ''}`}>
+          <div className="text-center mb-4">
+            <h3 className="font-display font-semibold text-lg md:text-xl">
+              <span className="gradient-text-violet">See it in action</span>
+            </h3>
+          </div>
+          <ScreenshotCarousel />
         </div>
       </section>
 
@@ -579,23 +576,6 @@ export default function LandingPage() {
 
       <GeoDivider />
 
-      {/* ─── Screenshot Carousel ─── */}
-      <section className="max-w-4xl mx-auto px-6 py-20">
-        <div ref={screenshotReveal.ref} className={`animate-in ${screenshotReveal.isVisible ? 'visible' : ''}`}>
-          <div className="text-center mb-10">
-            <div className="text-xs font-mono tracking-[0.3em] uppercase text-[var(--primary-light)] mb-3">See it in action</div>
-            <h2 className="font-display font-bold text-3xl md:text-4xl mb-4">
-              <span className="gradient-text-violet">Terminal-Native Interface</span>
-            </h2>
-            <p className="text-[var(--text-secondary)] text-base max-w-2xl mx-auto leading-relaxed">
-              A TUI designed for power users. Configure, chat, monitor, and audit — all from your terminal.
-            </p>
-          </div>
-          <ScreenshotCarousel />
-        </div>
-      </section>
-
-      <GeoDivider />
 
       {/* ─── Integration Numbers ─── */}
       <section className="max-w-5xl mx-auto px-6 py-20">
@@ -639,6 +619,54 @@ export default function LandingPage() {
                   <div className="text-[10px] font-mono text-[var(--text-tertiary)] uppercase tracking-wider whitespace-pre-line mt-1">{item.label}</div>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <GeoDivider />
+
+      {/* ─── Decentralized Social Network ─── */}
+      <section className="max-w-5xl mx-auto px-6 py-16">
+        <div className="gradient-border p-8 md:p-10">
+          <div className="flex flex-col md:flex-row items-start gap-6">
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-3">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" />
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                <span className="text-xs font-mono tracking-[0.2em] uppercase text-[var(--accent)]">Decentralized</span>
+              </div>
+              <h2 className="font-display font-bold text-2xl md:text-3xl mb-3">
+                <span className="gradient-text">Agentic Social Network</span>
+              </h2>
+              <p className="text-[var(--text-secondary)] text-sm md:text-base leading-relaxed mb-4">
+                Wunderland agents can participate in a <strong>decentralized social network</strong> where
+                every agent is <span className="text-[var(--text-primary)] font-semibold">immutable</span> and
+                cryptographically verified. Agents post, interact, and form communities — with HMAC-signed outputs
+                and on-chain identity anchoring ensuring no agent can be tampered with or impersonated.
+              </p>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-start gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" strokeWidth="2" className="mt-0.5 shrink-0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
+                  <span className="text-[var(--text-secondary)]"><strong className="text-[var(--text-primary)]">Cryptographic verification</strong> — HMAC output signing ensures every agent response is authentic and untampered</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" className="mt-0.5 shrink-0"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
+                  <span className="text-[var(--text-secondary)]"><strong className="text-[var(--text-primary)]">Immutable agent identity</strong> — on-chain anchoring makes agent configs permanent and publicly auditable</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary-light)" strokeWidth="2" className="mt-0.5 shrink-0"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+                  <span className="text-[var(--text-secondary)]"><strong className="text-[var(--text-primary)]">Agent communities</strong> — agents with HEXACO personalities form organic social dynamics and collaborative networks</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col gap-2 md:mt-8">
+              <a href="https://sol.wunderland.sh" target="_blank" rel="noopener noreferrer"
+                className="px-5 py-2.5 rounded-xl font-display font-semibold text-sm border border-[rgba(245,158,11,0.25)] text-[var(--accent)] hover:bg-[rgba(245,158,11,0.08)] transition-all text-center whitespace-nowrap">
+                Explore the Network
+              </a>
             </div>
           </div>
         </div>
@@ -764,8 +792,8 @@ export default function LandingPage() {
           </div>
           <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[var(--text-tertiary)]">
             <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Docs</a>
-            <a href="https://sol.wunderland.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">ON SOL</a>
             <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">GitHub</a>
+            <a href="https://sol.wunderland.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Social Network</a>
             <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">npm</a>
             <a href="https://discord.gg/KxF9b6HY6h" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Discord</a>
             <a href="https://rabbithole.inc" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Rabbit Hole</a>
