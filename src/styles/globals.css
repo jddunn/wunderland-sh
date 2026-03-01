@@ -46,33 +46,33 @@
 
 /* ---- Light Mode ---- */
 html.light {
-  /* Muted parchment / bronze palette — NOT bright */
-  --bg-void: #e0d5c1;
-  --bg-surface: #d6c9b3;
-  --bg-elevated: #cbbda5;
-  --bg-glass: rgba(120, 90, 40, 0.07);
-  --bg-glass-hover: rgba(120, 90, 40, 0.12);
+  /* Two-tone: soft white + warm peach-cream */
+  --bg-void: #f7f2ec;
+  --bg-surface: #f0e8de;
+  --bg-elevated: #e8ddd0;
+  --bg-glass: rgba(180, 140, 90, 0.06);
+  --bg-glass-hover: rgba(180, 140, 90, 0.10);
 
-  --text-primary: #1a1008;
-  --text-secondary: rgba(26, 16, 8, 0.75);
-  --text-tertiary: rgba(26, 16, 8, 0.50);
+  --text-primary: #2a1f12;
+  --text-secondary: rgba(42, 31, 18, 0.72);
+  --text-tertiary: rgba(42, 31, 18, 0.48);
 
-  --border-glass: rgba(120, 90, 40, 0.20);
-  --border-glow: rgba(166, 124, 64, 0.50);
+  --border-glass: rgba(180, 140, 90, 0.16);
+  --border-glow: rgba(180, 140, 90, 0.40);
 
   --primary: #6b4f20;
   --primary-light: #7a5a18;
   --primary-dark: #4a3815;
 
-  --accent: #a07208;
-  --accent-light: #876006;
-  --accent-dark: #6e4e05;
+  --accent: #b8860b;
+  --accent-light: #996b08;
+  --accent-dark: #7a5506;
 
-  --emerald: #047857;
-  --rose: #b02a25;
+  --emerald: #059669;
+  --rose: #c4322d;
   --cyan: #0c6b82;
 
-  --deco-gold: #a07208;
+  --deco-gold: #b8860b;
 
   color-scheme: light;
 }
@@ -87,16 +87,17 @@ html.light body::before {
 
 html.light body::after {
   background:
-    radial-gradient(ellipse 600px 400px at 20% 20%, rgba(120, 90, 40, 0.08), transparent),
-    radial-gradient(ellipse 500px 350px at 80% 60%, rgba(166, 124, 64, 0.06), transparent),
-    radial-gradient(ellipse 400px 300px at 50% 90%, rgba(100, 70, 30, 0.05), transparent);
+    radial-gradient(ellipse 800px 500px at 0% 0%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(ellipse 700px 500px at 100% 30%, rgba(240, 210, 170, 0.25), transparent),
+    radial-gradient(ellipse 600px 400px at 30% 80%, rgba(220, 190, 150, 0.15), transparent),
+    radial-gradient(ellipse 500px 350px at 80% 90%, rgba(180, 140, 90, 0.08), transparent);
 }
 
 html.light .glass-card {
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(12px);
-  border-color: rgba(120, 90, 40, 0.16);
-  box-shadow: 0 1px 3px rgba(26, 16, 8, 0.08);
+  border-color: rgba(180, 140, 90, 0.14);
+  box-shadow: 0 1px 3px rgba(42, 31, 18, 0.06);
 }
 
 html.light .glass-card::before {
@@ -191,9 +192,9 @@ html.light .deco-section-divider line {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
   border: 1px solid var(--border-glass);
   background: var(--bg-glass);
   color: var(--text-tertiary);
@@ -210,10 +211,10 @@ html.light .deco-section-divider line {
 .nav-rabbithole-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 12px;
+  gap: 7px;
+  padding: 7px 16px;
   border-radius: 20px;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 600;
   font-family: 'Syne', system-ui, sans-serif;
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.1));
@@ -385,9 +386,9 @@ html.light .deco-section-divider line {
 }
 
 html.light .screenshot-frame {
-  background: #d6c9b3;
-  border-color: rgba(120, 90, 40, 0.25);
-  box-shadow: 0 4px 16px rgba(26, 16, 8, 0.08);
+  background: #f0e8de;
+  border-color: rgba(180, 140, 90, 0.2);
+  box-shadow: 0 4px 16px rgba(42, 31, 18, 0.06);
 }
 
 html.light .screenshot-frame::before {
@@ -405,7 +406,7 @@ html.light .screenshot-header {
 }
 
 html.light .screenshot-body {
-  background: #cbbda5;
+  background: #e8ddd0;
 }
 
 html.light .agentos-banner {
@@ -760,4 +761,144 @@ body::after {
 .deco-center-diamond {
   animation: slow-spin 20s linear infinite;
   transform-origin: center;
+}
+
+/* ---- Clickable Screenshot Frame ---- */
+.screenshot-frame--clickable {
+  cursor: zoom-in;
+  transition: all 0.25s ease;
+}
+
+.screenshot-frame--clickable:hover {
+  box-shadow:
+    0 0 40px rgba(99, 102, 241, 0.15),
+    0 0 80px rgba(139, 92, 246, 0.08);
+  transform: scale(1.005);
+}
+
+.screenshot-frame--clickable:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+/* ---- Lightbox Modal ---- */
+@keyframes lightbox-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes lightbox-scale-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: lightbox-fade-in 0.25s ease;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 1100px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background: #0c0a20;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 0 60px rgba(99, 102, 241, 0.15),
+    0 0 120px rgba(139, 92, 246, 0.08);
+  animation: lightbox-scale-in 0.3s ease;
+}
+
+.lightbox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  background: rgba(99, 102, 241, 0.08);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.15);
+}
+
+.lightbox-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.lightbox-img {
+  width: 100%;
+  max-height: calc(90vh - 120px);
+  object-fit: contain;
+  background: #0a0820;
+}
+
+.lightbox-caption {
+  padding: 12px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: rgba(240, 238, 255, 0.6);
+  border-top: 1px solid rgba(99, 102, 241, 0.1);
+  text-align: center;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(99, 102, 241, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.lightbox-nav:hover {
+  background: rgba(99, 102, 241, 0.4);
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow: 0 0 24px rgba(99, 102, 241, 0.3);
+}
+
+.lightbox-nav--prev { left: 16px; }
+.lightbox-nav--next { right: 16px; }
+
+@media (max-width: 640px) {
+  .lightbox-nav--prev { left: 8px; }
+  .lightbox-nav--next { right: 8px; }
+  .lightbox-nav { width: 40px; height: 40px; }
 }

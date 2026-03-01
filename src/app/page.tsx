@@ -267,9 +267,52 @@ const SCREENSHOTS = [
   },
 ];
 
+function ScreenshotLightbox({ index, onClose, onPrev, onNext }: {
+  index: number; onClose: () => void; onPrev: () => void; onNext: () => void;
+}) {
+  const slide = SCREENSHOTS[index];
+
+  React.useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft') onPrev();
+      if (e.key === 'ArrowRight') onNext();
+    };
+    document.addEventListener('keydown', handler);
+    document.body.style.overflow = 'hidden';
+    return () => { document.removeEventListener('keydown', handler); document.body.style.overflow = ''; };
+  }, [onClose, onPrev, onNext]);
+
+  return (
+    <div className="lightbox-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-label={`Screenshot: ${slide.title}`}>
+      <div className="lightbox-content" onClick={e => e.stopPropagation()}>
+        <div className="lightbox-header">
+          <span className="font-mono text-sm text-[var(--text-secondary)]">{slide.title}</span>
+          <span className="font-mono text-xs text-[var(--text-tertiary)]">{index + 1} / {SCREENSHOTS.length}</span>
+          <button type="button" onClick={onClose} className="lightbox-close" aria-label="Close">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+          </button>
+        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={slide.image} alt={slide.title} className="lightbox-img" />
+        <div className="lightbox-caption">
+          <span style={{ color: slide.color }}>$</span> {slide.caption}
+        </div>
+      </div>
+      <button type="button" className="lightbox-nav lightbox-nav--prev" onClick={e => { e.stopPropagation(); onPrev(); }} aria-label="Previous screenshot">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6" /></svg>
+      </button>
+      <button type="button" className="lightbox-nav lightbox-nav--next" onClick={e => { e.stopPropagation(); onNext(); }} aria-label="Next screenshot">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 6 15 12 9 18" /></svg>
+      </button>
+    </div>
+  );
+}
+
 function ScreenshotCarousel() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   React.useEffect(() => {
     if (paused) return;
@@ -280,40 +323,54 @@ function ScreenshotCarousel() {
   const slide = SCREENSHOTS[current];
 
   return (
-    <div className="screenshot-carousel" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-      <div className="screenshot-frame">
-        <div className="screenshot-header">
-          <div className="terminal-dot" style={{ background: '#ff5f56' }} />
-          <div className="terminal-dot" style={{ background: '#ffbd2e' }} />
-          <div className="terminal-dot" style={{ background: '#27c93f' }} />
-          <span className="text-[10px] text-[var(--text-tertiary)] ml-2 font-mono">{slide.title}</span>
+    <>
+      <div className="screenshot-carousel" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+        <div className="screenshot-frame screenshot-frame--clickable" onClick={() => setLightboxIndex(current)}
+          role="button" tabIndex={0} aria-label={`View ${slide.title} fullscreen`}
+          onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLightboxIndex(current); } }}>
+          <div className="screenshot-header">
+            <div className="terminal-dot" style={{ background: '#ff5f56' }} />
+            <div className="terminal-dot" style={{ background: '#ffbd2e' }} />
+            <div className="terminal-dot" style={{ background: '#27c93f' }} />
+            <span className="text-[11px] text-[var(--text-tertiary)] ml-2 font-mono">{slide.title}</span>
+            <span className="ml-auto text-[10px] text-[var(--text-tertiary)] font-mono opacity-60">click to expand</span>
+          </div>
+          <div className="screenshot-body">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={slide.image} alt={slide.title} />
+          </div>
+          <div className="screenshot-caption">
+            <span style={{ color: slide.color }}>$</span> {slide.caption}
+          </div>
         </div>
-        <div className="screenshot-body">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={slide.image} alt={slide.title} />
-        </div>
-        <div className="screenshot-caption">
-          <span style={{ color: slide.color }}>$</span> {slide.caption}
+
+        <button type="button" className="carousel-nav carousel-nav--prev"
+          onClick={e => { e.stopPropagation(); setCurrent(c => (c - 1 + SCREENSHOTS.length) % SCREENSHOTS.length); }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6" /></svg>
+        </button>
+        <button type="button" className="carousel-nav carousel-nav--next"
+          onClick={e => { e.stopPropagation(); setCurrent(c => (c + 1) % SCREENSHOTS.length); }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 6 15 12 9 18" /></svg>
+        </button>
+
+        <div className="carousel-dots">
+          {SCREENSHOTS.map((_, i) => (
+            <button key={i} type="button"
+              className={`carousel-dot ${i === current ? 'carousel-dot--active' : ''}`}
+              onClick={() => setCurrent(i)} />
+          ))}
         </div>
       </div>
 
-      <button type="button" className="carousel-nav carousel-nav--prev"
-        onClick={() => setCurrent(c => (c - 1 + SCREENSHOTS.length) % SCREENSHOTS.length)}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6" /></svg>
-      </button>
-      <button type="button" className="carousel-nav carousel-nav--next"
-        onClick={() => setCurrent(c => (c + 1) % SCREENSHOTS.length)}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 6 15 12 9 18" /></svg>
-      </button>
-
-      <div className="carousel-dots">
-        {SCREENSHOTS.map((_, i) => (
-          <button key={i} type="button"
-            className={`carousel-dot ${i === current ? 'carousel-dot--active' : ''}`}
-            onClick={() => setCurrent(i)} />
-        ))}
-      </div>
-    </div>
+      {lightboxIndex !== null && (
+        <ScreenshotLightbox
+          index={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+          onPrev={() => setLightboxIndex(i => (i! - 1 + SCREENSHOTS.length) % SCREENSHOTS.length)}
+          onNext={() => setLightboxIndex(i => (i! + 1) % SCREENSHOTS.length)}
+        />
+      )}
+    </>
   );
 }
 
@@ -336,21 +393,21 @@ export default function LandingPage() {
     <div className="relative">
       {/* ─── Navigation ─── */}
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[var(--bg-void)]/80 border-b border-[var(--border-glass)]">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-2.5">
-            <RabbitHoleIcon size={28} />
-            <span className="font-display font-bold text-sm tracking-wide">WUNDERLAND</span>
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          <a href="/" className="flex items-center gap-3">
+            <WunderlandIcon size={34} id="nav-wl" />
+            <span className="font-display font-bold text-base tracking-wide">WUNDERLAND</span>
           </a>
-          <div className="flex items-center gap-4 text-xs font-mono">
+          <div className="flex items-center gap-5 text-sm font-mono">
             <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer" className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors">Docs</a>
             <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer" className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors">GitHub</a>
             <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer"
-              className="px-3 py-1.5 rounded-lg bg-[rgba(99,102,241,0.12)] border border-[rgba(99,102,241,0.25)] text-[var(--primary-light)] hover:bg-[rgba(99,102,241,0.2)] transition-all">
+              className="px-4 py-2 rounded-lg bg-[rgba(99,102,241,0.12)] border border-[rgba(99,102,241,0.25)] text-[var(--primary-light)] hover:bg-[rgba(99,102,241,0.2)] transition-all">
               npm
             </a>
             <a href="https://rabbithole.inc" target="_blank" rel="noopener noreferrer"
               className="nav-rabbithole-btn">
-              <RabbitHoleIcon size={16} />
+              <RabbitHoleIcon size={18} />
               <span>Try the Web UI</span>
             </a>
             <ThemeToggle />
@@ -363,7 +420,7 @@ export default function LandingPage() {
         <HeroParticles />
         <div ref={heroReveal.ref} className={`relative z-10 text-center animate-in ${heroReveal.isVisible ? 'visible' : ''}`}>
           <div className="mb-6">
-            <RabbitHoleIcon size={80} />
+            <WunderlandIcon size={80} id="hero-wl" />
           </div>
 
           <h1 className="font-display font-bold text-5xl sm:text-6xl md:text-8xl tracking-tight mb-4">
@@ -371,13 +428,14 @@ export default function LandingPage() {
           </h1>
 
           <p className="text-[var(--text-secondary)] text-lg sm:text-xl md:text-2xl max-w-2xl mx-auto mb-3 leading-relaxed">
-            Deploy autonomous AI agents with <span className="text-[var(--text-primary)] font-semibold">personality</span>,{' '}
+            The open-source <span className="text-[var(--text-primary)] font-semibold">OpenClaw fork</span> for deploying
+            autonomous AI agents with <span className="text-[var(--text-primary)] font-semibold">personality</span>,{' '}
             <span className="text-[var(--text-primary)] font-semibold">memory</span>, and{' '}
             <span className="text-[var(--text-primary)] font-semibold">real skills</span>.
           </p>
 
           <p className="text-[var(--text-tertiary)] text-sm font-mono mb-10">
-            Free &amp; open-source. Integrated with{' '}
+            Free &amp; open-source OpenClaw fork. Integrated with{' '}
             <a href="https://docs.agentos.sh" target="_blank" rel="noopener noreferrer" className="text-[var(--emerald)] hover:underline">AgentOS</a>{' '}
             for autonomous agentic planning &amp; personality. Self-host locally with Ollama — fully offline.
           </p>
@@ -421,7 +479,7 @@ export default function LandingPage() {
       </section>
 
       {/* ─── Screenshot Carousel (compact) ─── */}
-      <section className="max-w-3xl mx-auto px-6 py-8">
+      <section className="max-w-4xl mx-auto px-6 py-8">
         <div ref={screenshotReveal.ref} className={`animate-in ${screenshotReveal.isVisible ? 'visible' : ''}`}>
           <div className="text-center mb-4">
             <h3 className="font-display font-semibold text-lg md:text-xl">
@@ -787,7 +845,7 @@ export default function LandingPage() {
       <footer className="border-t border-[var(--border-glass)] py-10 px-6">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <RabbitHoleIcon size={20} />
+            <WunderlandIcon size={20} id="footer-wl" />
             <span className="font-display font-semibold text-xs text-[var(--text-tertiary)]">WUNDERLAND</span>
           </div>
           <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[var(--text-tertiary)]">
