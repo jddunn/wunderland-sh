@@ -1,0 +1,12 @@
+# https://wunderland.sh robots.txt
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://wunderland.sh/sitemap.xml

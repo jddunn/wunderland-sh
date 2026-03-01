@@ -1,0 +1,14 @@
+{
+  "name": "Wunderland — Autonomous AI Agent Framework",
+  "short_name": "Wunderland",
+  "description": "Free open-source autonomous AI agent framework with HEXACO personalities, 5-tier security, 51+ extensions, and 28 messaging channels.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0f0b2e",
+  "background_color": "#0d0b14",
+  "icons": [
+    { "src": "/icon.svg", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}
