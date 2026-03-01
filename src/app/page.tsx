@@ -234,7 +234,7 @@ function HeroParticles() {
    Screenshot Carousel
    ============================================================ */
 
-const SCREENSHOTS = [
+const SCREENSHOTS_CLI = [
   {
     title: 'Chat + Tool Calling',
     caption: 'wunderland chat — autonomous tool calling with news_search, web_search, summarize',
@@ -273,10 +273,45 @@ const SCREENSHOTS = [
   },
 ];
 
-function ScreenshotLightbox({ index, onClose, onPrev, onNext }: {
-  index: number; onClose: () => void; onPrev: () => void; onNext: () => void;
+const SCREENSHOTS_TUI = [
+  {
+    title: 'TUI Dashboard',
+    caption: 'wunderland tui — command palette with sidebar navigation and keyboard shortcuts',
+    image: '/screenshots/tui-dashboard.png',
+    color: 'var(--primary-light)',
+  },
+  {
+    title: 'Fuzzy Search',
+    caption: 'wunderland tui — press / to fuzzy-search commands, configs, and actions',
+    image: '/screenshots/tui-search.png',
+    color: 'var(--cyan)',
+  },
+  {
+    title: 'HITL Dashboard',
+    caption: 'localhost:3777/hitl — approve or reject tool calls in real-time via web UI',
+    image: '/screenshots/hitl-dashboard.png',
+    color: 'var(--rose)',
+  },
+];
+
+type ScreenshotTab = 'cli' | 'tui';
+const SCREENSHOT_TABS: { key: ScreenshotTab; label: string; icon: React.ReactNode }[] = [
+  {
+    key: 'cli',
+    label: 'CLI',
+    icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 17 10 11 4 5" /><line x1="12" y1="19" x2="20" y2="19" /></svg>,
+  },
+  {
+    key: 'tui',
+    label: 'TUI / Web UI',
+    icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" /></svg>,
+  },
+];
+
+function ScreenshotLightbox({ index, screenshots, onClose, onPrev, onNext }: {
+  index: number; screenshots: typeof SCREENSHOTS_CLI; onClose: () => void; onPrev: () => void; onNext: () => void;
 }) {
-  const slide = SCREENSHOTS[index];
+  const slide = screenshots[index];
 
   React.useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -294,7 +329,7 @@ function ScreenshotLightbox({ index, onClose, onPrev, onNext }: {
       <div className="lightbox-content" onClick={e => e.stopPropagation()}>
         <div className="lightbox-header">
           <span className="font-mono text-sm text-[var(--text-secondary)]">{slide.title}</span>
-          <span className="font-mono text-xs text-[var(--text-tertiary)]">{index + 1} / {SCREENSHOTS.length}</span>
+          <span className="font-mono text-xs text-[var(--text-tertiary)]">{index + 1} / {screenshots.length}</span>
           <button type="button" onClick={onClose} className="lightbox-close" aria-label="Close">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
           </button>
@@ -316,13 +351,29 @@ function ScreenshotLightbox({ index, onClose, onPrev, onNext }: {
 }
 
 function ScreenshotGrid() {
+  const [activeTab, setActiveTab] = useState<ScreenshotTab>('cli');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const screenshots = activeTab === 'cli' ? SCREENSHOTS_CLI : SCREENSHOTS_TUI;
 
   return (
     <>
+      <div className="screenshot-tabs">
+        {SCREENSHOT_TABS.map(tab => (
+          <button
+            key={tab.key}
+            type="button"
+            className={`screenshot-tab ${activeTab === tab.key ? 'screenshot-tab--active' : ''}`}
+            onClick={() => { setActiveTab(tab.key); setLightboxIndex(null); }}
+          >
+            {tab.icon}
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
       <div className="screenshot-grid">
-        {SCREENSHOTS.map((shot, i) => (
-          <div key={i} className="screenshot-card screenshot-frame--clickable"
+        {screenshots.map((shot, i) => (
+          <div key={`${activeTab}-${i}`} className="screenshot-card screenshot-frame--clickable"
             onClick={() => setLightboxIndex(i)}
             role="button" tabIndex={0} aria-label={`View ${shot.title} fullscreen`}
             onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLightboxIndex(i); } }}>
@@ -346,9 +397,10 @@ function ScreenshotGrid() {
       {lightboxIndex !== null && (
         <ScreenshotLightbox
           index={lightboxIndex}
+          screenshots={screenshots}
           onClose={() => setLightboxIndex(null)}
-          onPrev={() => setLightboxIndex(i => (i! - 1 + SCREENSHOTS.length) % SCREENSHOTS.length)}
-          onNext={() => setLightboxIndex(i => (i! + 1) % SCREENSHOTS.length)}
+          onPrev={() => setLightboxIndex(i => (i! - 1 + screenshots.length) % screenshots.length)}
+          onNext={() => setLightboxIndex(i => (i! + 1) % screenshots.length)}
         />
       )}
     </>
