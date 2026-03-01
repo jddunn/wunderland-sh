@@ -236,34 +236,40 @@ function HeroParticles() {
 
 const SCREENSHOTS = [
   {
-    title: 'Help & Commands',
-    caption: 'wunderland help — 28 CLI commands including setup, chat, start, skills, models, seal, presets, and more',
-    image: '/screenshots/help.png',
+    title: 'LLM Providers',
+    caption: 'wunderland models — 13 providers from OpenAI to Ollama',
+    image: '/screenshots/models-grid.png',
     color: 'var(--primary-light)',
   },
   {
     title: 'Agent Presets',
-    caption: 'wunderland presets — 8 pre-configured agent archetypes with HEXACO personalities, security tiers, and curated skills',
-    image: '/screenshots/presets.png',
+    caption: 'wunderland list-presets — 8 agent archetypes + HEXACO traits',
+    image: '/screenshots/presets-grid.png',
     color: 'var(--accent)',
   },
   {
     title: 'Skills Registry',
-    caption: 'wunderland skills — 18 curated SKILL.md files including web-scraper, deep-research, social-broadcast, and coding-agent',
-    image: '/screenshots/skills.png',
+    caption: 'wunderland skills — 17 curated skills from weather to coding',
+    image: '/screenshots/skills-grid.png',
     color: 'var(--emerald)',
   },
   {
-    title: 'LLM Providers',
-    caption: 'wunderland models — 13 LLM providers from OpenAI and Anthropic to Ollama for fully offline self-hosted agents',
-    image: '/screenshots/models.png',
+    title: 'Health Check',
+    caption: 'wunderland doctor — keys, channels, connectivity',
+    image: '/screenshots/doctor-grid.png',
+    color: 'var(--cyan)',
+  },
+  {
+    title: 'Extensions',
+    caption: 'wunderland extensions — 22 tools & channels available',
+    image: '/screenshots/extensions-grid.png',
     color: 'var(--rose)',
   },
   {
-    title: 'Messaging Channels',
-    caption: 'wunderland channels — 28 messaging channels including Telegram, WhatsApp, Discord, Slack, Email, SMS, and more',
-    image: '/screenshots/channels.png',
-    color: 'var(--cyan)',
+    title: 'Agent Status',
+    caption: 'wunderland status — LLM keys, channels, token usage',
+    image: '/screenshots/status-grid.png',
+    color: 'var(--accent)',
   },
 ];
 
@@ -309,57 +315,32 @@ function ScreenshotLightbox({ index, onClose, onPrev, onNext }: {
   );
 }
 
-function ScreenshotCarousel() {
-  const [current, setCurrent] = useState(0);
-  const [paused, setPaused] = useState(false);
+function ScreenshotGrid() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-
-  React.useEffect(() => {
-    if (paused) return;
-    const timer = setInterval(() => setCurrent(c => (c + 1) % SCREENSHOTS.length), 5000);
-    return () => clearInterval(timer);
-  }, [paused]);
-
-  const slide = SCREENSHOTS[current];
 
   return (
     <>
-      <div className="screenshot-carousel" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-        <div className="screenshot-frame screenshot-frame--clickable" onClick={() => setLightboxIndex(current)}
-          role="button" tabIndex={0} aria-label={`View ${slide.title} fullscreen`}
-          onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLightboxIndex(current); } }}>
-          <div className="screenshot-header">
-            <div className="terminal-dot" style={{ background: '#ff5f56' }} />
-            <div className="terminal-dot" style={{ background: '#ffbd2e' }} />
-            <div className="terminal-dot" style={{ background: '#27c93f' }} />
-            <span className="text-[11px] text-[var(--text-tertiary)] ml-2 font-mono">{slide.title}</span>
-            <span className="ml-auto text-[10px] text-[var(--text-tertiary)] font-mono opacity-60">click to expand</span>
+      <div className="screenshot-grid">
+        {SCREENSHOTS.map((shot, i) => (
+          <div key={i} className="screenshot-card screenshot-frame--clickable"
+            onClick={() => setLightboxIndex(i)}
+            role="button" tabIndex={0} aria-label={`View ${shot.title} fullscreen`}
+            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLightboxIndex(i); } }}>
+            <div className="screenshot-card-header">
+              <div className="terminal-dot" style={{ background: '#ff5f56', width: 7, height: 7 }} />
+              <div className="terminal-dot" style={{ background: '#ffbd2e', width: 7, height: 7 }} />
+              <div className="terminal-dot" style={{ background: '#27c93f', width: 7, height: 7 }} />
+              <span className="text-[9px] text-[var(--text-tertiary)] ml-1.5 font-mono truncate">{shot.title}</span>
+            </div>
+            <div className="screenshot-card-body">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={shot.image} alt={shot.title} />
+            </div>
+            <div className="screenshot-card-caption">
+              <span style={{ color: shot.color }}>$</span> {shot.caption}
+            </div>
           </div>
-          <div className="screenshot-body">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={slide.image} alt={slide.title} />
-          </div>
-          <div className="screenshot-caption">
-            <span style={{ color: slide.color }}>$</span> {slide.caption}
-          </div>
-        </div>
-
-        <button type="button" className="carousel-nav carousel-nav--prev"
-          onClick={e => { e.stopPropagation(); setCurrent(c => (c - 1 + SCREENSHOTS.length) % SCREENSHOTS.length); }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6" /></svg>
-        </button>
-        <button type="button" className="carousel-nav carousel-nav--next"
-          onClick={e => { e.stopPropagation(); setCurrent(c => (c + 1) % SCREENSHOTS.length); }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 6 15 12 9 18" /></svg>
-        </button>
-
-        <div className="carousel-dots">
-          {SCREENSHOTS.map((_, i) => (
-            <button key={i} type="button"
-              className={`carousel-dot ${i === current ? 'carousel-dot--active' : ''}`}
-              onClick={() => setCurrent(i)} />
-          ))}
-        </div>
+        ))}
       </div>
 
       {lightboxIndex !== null && (
@@ -478,15 +459,16 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ─── Screenshot Carousel (compact) ─── */}
-      <section className="max-w-4xl mx-auto px-6 py-8">
+      {/* ─── Screenshot Grid ─── */}
+      <section className="max-w-6xl mx-auto px-6 py-10">
         <div ref={screenshotReveal.ref} className={`animate-in ${screenshotReveal.isVisible ? 'visible' : ''}`}>
-          <div className="text-center mb-4">
+          <div className="text-center mb-6">
             <h3 className="font-display font-semibold text-lg md:text-xl">
               <span className="gradient-text-violet">See it in action</span>
             </h3>
+            <p className="text-[var(--text-tertiary)] text-xs mt-1 font-mono">click any screenshot to expand</p>
           </div>
-          <ScreenshotCarousel />
+          <ScreenshotGrid />
         </div>
       </section>
 
