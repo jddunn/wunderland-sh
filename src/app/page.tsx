@@ -236,39 +236,39 @@ function HeroParticles() {
 
 const SCREENSHOTS = [
   {
-    title: 'LLM Providers',
-    caption: 'wunderland models — 13 providers from OpenAI to Ollama',
-    image: '/screenshots/models-grid.png',
+    title: 'Chat + Tool Calling',
+    caption: 'wunderland chat — autonomous tool calling with news_search, web_search, summarize',
+    image: '/screenshots/chat-toolcall.png',
     color: 'var(--primary-light)',
   },
   {
-    title: 'Agent Presets',
-    caption: 'wunderland list-presets — 8 agent archetypes + HEXACO traits',
-    image: '/screenshots/presets-grid.png',
+    title: 'Setup Wizard',
+    caption: 'wunderland setup — presets, providers, skills, channels, security tiers',
+    image: '/screenshots/setup-wizard.png',
     color: 'var(--accent)',
+  },
+  {
+    title: 'LLM Providers',
+    caption: 'wunderland models — 13 providers from OpenAI to Ollama',
+    image: '/screenshots/models-grid.png',
+    color: 'var(--emerald)',
+  },
+  {
+    title: 'Agent Presets',
+    caption: 'wunderland list-presets — 8 archetypes + HEXACO traits',
+    image: '/screenshots/presets-grid.png',
+    color: 'var(--cyan)',
   },
   {
     title: 'Skills Registry',
     caption: 'wunderland skills — 17 curated skills from weather to coding',
     image: '/screenshots/skills-grid.png',
-    color: 'var(--emerald)',
-  },
-  {
-    title: 'Health Check',
-    caption: 'wunderland doctor — keys, channels, connectivity',
-    image: '/screenshots/doctor-grid.png',
-    color: 'var(--cyan)',
-  },
-  {
-    title: 'Extensions',
-    caption: 'wunderland extensions — 22 tools & channels available',
-    image: '/screenshots/extensions-grid.png',
     color: 'var(--rose)',
   },
   {
-    title: 'Agent Status',
-    caption: 'wunderland status — LLM keys, channels, token usage',
-    image: '/screenshots/status-grid.png',
+    title: 'Health Check',
+    caption: 'wunderland doctor — keys, channels, connectivity status',
+    image: '/screenshots/doctor-grid.png',
     color: 'var(--accent)',
   },
 ];
