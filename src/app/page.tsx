@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { WunderlandIcon, RabbitHoleIcon } from '@/components/brand';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { HexacoRadar } from '@/components/HexacoRadar';
+import { CatalogBrowser } from '@/components/CatalogBrowser';
 import { useScrollReveal, useScrollRevealGroup } from '@/lib/useScrollReveal';
 import { useTilt } from '@/lib/useTilt';
 
@@ -637,6 +638,7 @@ export default function LandingPage() {
   const videoReveal = useScrollReveal();
   const cliReveal = useScrollReveal();
   const screenshotReveal = useScrollReveal();
+  const catalogReveal = useScrollReveal();
   const agentosReveal = useScrollReveal();
   const ctaReveal = useScrollReveal();
 
@@ -767,7 +769,7 @@ export default function LandingPage() {
               <span className="gradient-text-violet">See it in action</span>
             </h3>
           </div>
-          <div className="terminal" style={{ overflow: 'hidden' }}>
+          <div className="video-player">
             <div className="terminal-header">
               <div className="terminal-dot" style={{ background: '#ff5f56' }} />
               <div className="terminal-dot" style={{ background: '#ffbd2e' }} />
@@ -991,6 +993,24 @@ export default function LandingPage() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      <GeoDivider />
+
+      {/* ─── Skills & Extensions Catalog ─── */}
+      <section className="max-w-6xl mx-auto px-6 py-20">
+        <div ref={catalogReveal.ref} className={`animate-in ${catalogReveal.isVisible ? 'visible' : ''}`}>
+          <div className="text-center mb-10">
+            <div className="text-xs font-mono tracking-[0.3em] uppercase text-[var(--primary-light)] mb-3">Browse the catalog</div>
+            <h2 className="font-display font-bold text-3xl md:text-4xl mb-4">
+              <span className="gradient-text">Skills & Extensions</span>
+            </h2>
+            <p className="text-[var(--text-secondary)] text-base max-w-2xl mx-auto leading-relaxed">
+              18 curated skills, 28 messaging channels, 13 LLM providers, and 15 tools — all open-source and composable.
+            </p>
+          </div>
+          <CatalogBrowser />
         </div>
       </section>
 
