@@ -41,6 +41,21 @@
   /* Art Deco Gold (for dividers) */
   --deco-gold: #f59e0b;
 
+  /* WunderlandIcon colors (dark mode) */
+  --wl-indigo-start: #6366f1;
+  --wl-indigo-mid: #818cf8;
+  --wl-indigo-end: #a78bfa;
+  --wl-amber-start: #d97706;
+  --wl-amber-mid: #f59e0b;
+  --wl-amber-end: #fbbf24;
+  --wl-frame-start: #1e1b4b;
+  --wl-frame-mid: #0f0b2e;
+  --wl-frame-end: #1e1b4b;
+  --wl-mirror-start: rgba(49, 46, 129, 0.7);
+  --wl-mirror-mid: rgba(67, 56, 202, 0.4);
+  --wl-mirror-end: rgba(49, 46, 129, 0.15);
+  --wl-shadow-opacity: 0.5;
+
   color-scheme: dark;
 }
 
@@ -73,6 +88,21 @@ html.light {
   --cyan: #0c6b82;
 
   --deco-gold: #b8860b;
+
+  /* WunderlandIcon colors (light mode) */
+  --wl-indigo-start: #7a5a18;
+  --wl-indigo-mid: #8b6914;
+  --wl-indigo-end: #a67c40;
+  --wl-amber-start: #996b08;
+  --wl-amber-mid: #b8860b;
+  --wl-amber-end: #c49a52;
+  --wl-frame-start: #d4c5a0;
+  --wl-frame-mid: #e8ddd0;
+  --wl-frame-end: #d4c5a0;
+  --wl-mirror-start: rgba(107, 79, 32, 0.3);
+  --wl-mirror-mid: rgba(107, 79, 32, 0.15);
+  --wl-mirror-end: rgba(107, 79, 32, 0.05);
+  --wl-shadow-opacity: 0.15;
 
   color-scheme: light;
 }
