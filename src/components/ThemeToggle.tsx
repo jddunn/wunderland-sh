@@ -3,13 +3,13 @@
 import { useState, useEffect } from 'react';
 
 export function ThemeToggle() {
+  // Read from DOM (already applied by blocking script in layout.tsx)
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
   useEffect(() => {
-    const saved = localStorage.getItem('wl-theme');
-    if (saved === 'light') {
+    // Sync React state with what the blocking script already applied
+    if (document.documentElement.classList.contains('light')) {
       setTheme('light');
-      document.documentElement.classList.add('light');
     }
   }, []);
 
