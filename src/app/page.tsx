@@ -647,7 +647,7 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3">
             <WunderlandIcon size={34} id="nav-wl" />
-            <span className="font-display font-bold text-base tracking-wide">WUNDERLAND</span>
+            <span className="font-display-syne font-bold text-base tracking-wide">WUNDERLAND</span>
           </a>
 
           {/* Desktop nav */}
@@ -702,7 +702,7 @@ export default function LandingPage() {
             <HeroRadar />
           </div>
 
-          <h1 className="font-display font-bold text-5xl sm:text-6xl md:text-8xl tracking-tight mb-4">
+          <h1 className="font-display-syne font-bold text-5xl sm:text-6xl md:text-8xl tracking-tight mb-4">
             <span className="hero-glow shimmer-text">WUNDERLAND</span>
           </h1>
 
@@ -1158,7 +1158,7 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
             <WunderlandIcon size={20} id="footer-wl" />
-            <span className="font-display font-semibold text-xs text-[var(--text-tertiary)]">WUNDERLAND</span>
+            <span className="font-display-syne font-semibold text-xs text-[var(--text-tertiary)]">WUNDERLAND</span>
           </div>
           <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[var(--text-tertiary)]">
             <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Docs</a>

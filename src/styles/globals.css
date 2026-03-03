@@ -215,7 +215,7 @@ html.light .deco-section-divider line {
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 600;
-  font-family: 'Syne', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.1));
   border: 1px solid rgba(245, 158, 11, 0.3);
   color: var(--accent);
@@ -562,9 +562,12 @@ body::after {
 }
 
 .font-display {
-  font-family: 'Syne', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   line-height: 1.35;
-  overflow: visible;
+}
+.font-display-syne {
+  font-family: 'Syne', system-ui, sans-serif;
+  letter-spacing: 0.04em;
 }
 .font-mono { font-family: 'JetBrains Mono', 'Space Mono', monospace; }
 
@@ -607,7 +610,9 @@ body::after {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  padding-bottom: 0.1em;
+  padding-bottom: 0.15em;
+  line-height: 1.45;
+  display: inline-block;
 }
 
 .gradient-text-violet {
@@ -615,7 +620,9 @@ body::after {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  padding-bottom: 0.1em;
+  padding-bottom: 0.15em;
+  line-height: 1.45;
+  display: inline-block;
 }
 
 /* ---- Section Glows ---- */
