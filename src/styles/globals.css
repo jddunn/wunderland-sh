@@ -116,13 +116,14 @@ html.light .glass-card:hover {
 }
 
 html.light .terminal {
-  background: #1a1408;
-  border-color: rgba(166, 124, 64, 0.3);
+  background: #0c0a1a;
+  border-color: rgba(107, 79, 32, 0.35);
+  box-shadow: 0 2px 12px rgba(42, 31, 18, 0.12);
 }
 
 html.light .terminal-header {
-  background: rgba(166, 124, 64, 0.15);
-  border-bottom-color: rgba(166, 124, 64, 0.2);
+  background: rgba(99, 102, 241, 0.10);
+  border-bottom-color: rgba(99, 102, 241, 0.15);
 }
 
 html.light .terminal-body .cmd { color: #f0eeff; }
@@ -478,27 +479,27 @@ html.light .screenshot-tab--active {
 }
 
 html.light .screenshot-card {
-  background: #f0e8de;
-  border-color: rgba(180, 140, 90, 0.2);
-  box-shadow: 0 2px 8px rgba(42, 31, 18, 0.06);
+  background: #0c0a20;
+  border-color: rgba(107, 79, 32, 0.3);
+  box-shadow: 0 2px 12px rgba(42, 31, 18, 0.1);
 }
 
 html.light .screenshot-card::before {
   background: linear-gradient(135deg,
-    rgba(184, 134, 11, 0.25),
+    rgba(107, 79, 32, 0.25),
     rgba(166, 124, 64, 0.15),
     rgba(139, 90, 43, 0.1),
-    rgba(184, 134, 11, 0.2)
+    rgba(107, 79, 32, 0.2)
   );
   opacity: 0.35;
 }
 
 html.light .screenshot-card-header {
-  background: rgba(166, 124, 64, 0.05);
+  background: rgba(99, 102, 241, 0.08);
 }
 
 html.light .screenshot-card-body {
-  background: #e8ddd0;
+  background: #0a0820;
 }
 
 html.light .agentos-banner {

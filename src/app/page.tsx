@@ -450,38 +450,167 @@ function GitHubStats() {
 }
 
 /* ============================================================
-   Hero Radar — cycles through presets
+   Hero Radar — animated morphing between presets
    ============================================================ */
+
+const TRAIT_KEYS_ORDER = ['H', 'E', 'X', 'A', 'C', 'O'] as const;
+const TRAIT_LABELS = ['Honesty', 'Emotionality', 'Extraversion', 'Agreeableness', 'Conscientiousness', 'Openness'];
+const TRAIT_COLORS = ['#ff6b9d', '#c084fc', '#fbbf24', '#34d399', '#60a5fa', '#f472b6'];
+
+function useAnimatedValues(target: number[], duration = 800) {
+  const [current, setCurrent] = useState(target);
+  const rafRef = React.useRef<number>(0);
+  const startRef = React.useRef<number[]>(target);
+  const targetRef = React.useRef<number[]>(target);
+  const startTimeRef = React.useRef<number>(0);
+
+  useEffect(() => {
+    startRef.current = [...current];
+    targetRef.current = target;
+    startTimeRef.current = performance.now();
+
+    const animate = (now: number) => {
+      const elapsed = now - startTimeRef.current;
+      const t = Math.min(elapsed / duration, 1);
+      // easeInOutCubic
+      const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+      const next = startRef.current.map((s, i) => s + (targetRef.current[i] - s) * ease);
+      setCurrent(next);
+
+      if (t < 1) {
+        rafRef.current = requestAnimationFrame(animate);
+      }
+    };
+
+    rafRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [target, duration]);
+
+  return current;
+}
 
 function HeroRadar() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [fade, setFade] = useState(true);
+  const [nameOpacity, setNameOpacity] = useState(1);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setFade(false);
+      setNameOpacity(0);
       setTimeout(() => {
         setActiveIndex(i => (i + 1) % PRESETS.length);
-        setFade(true);
-      }, 300);
-    }, 3000);
+        setNameOpacity(1);
+      }, 250);
+    }, 3500);
     return () => clearInterval(timer);
   }, []);
 
   const preset = PRESETS[activeIndex];
-  const radarTraits = {
-    honesty: preset.traits.H,
-    emotionality: preset.traits.E,
-    extraversion: preset.traits.X,
-    agreeableness: preset.traits.A,
-    conscientiousness: preset.traits.C,
-    openness: preset.traits.O,
-  };
+  const targetValues = useMemo(
+    () => TRAIT_KEYS_ORDER.map(k => preset.traits[k]),
+    [preset]
+  );
+  const animatedValues = useAnimatedValues(targetValues, 900);
+
+  const size = 220;
+  const cx = size / 2;
+  const cy = size / 2;
+  const radius = size * 0.34;
+
+  const getPoints = (values: number[]): string =>
+    values.map((val, i) => {
+      const angle = (Math.PI * 2 * i) / 6 - Math.PI / 2;
+      return `${cx + radius * val * Math.cos(angle)},${cy + radius * val * Math.sin(angle)}`;
+    }).join(' ');
+
+  const gridLevels = [0.25, 0.5, 0.75, 1.0];
+  const axes = Array.from({ length: 6 }, (_, i) => {
+    const angle = (Math.PI * 2 * i) / 6 - Math.PI / 2;
+    return { x: cx + radius * Math.cos(angle), y: cy + radius * Math.sin(angle) };
+  });
+
+  const dataPoints = animatedValues.map((val, i) => {
+    const angle = (Math.PI * 2 * i) / 6 - Math.PI / 2;
+    return { x: cx + radius * val * Math.cos(angle), y: cy + radius * val * Math.sin(angle), value: val };
+  });
+
+  const labelPositions = TRAIT_KEYS_ORDER.map((_, i) => {
+    const angle = (Math.PI * 2 * i) / 6 - Math.PI / 2;
+    const lr = radius * 1.35;
+    return { x: cx + lr * Math.cos(angle), y: cy + lr * Math.sin(angle) };
+  });
 
   return (
-    <div className="flex flex-col items-center" style={{ transition: 'opacity 0.3s ease', opacity: fade ? 1 : 0 }}>
-      <HexacoRadar traits={radarTraits} size={180} animated showLabels glowColor="var(--primary, #6366f1)" className="w-[140px] h-[140px] sm:w-[180px] sm:h-[180px]" />
-      <div className="mt-2 text-xs font-mono tracking-wider" style={{ color: preset.color }}>
+    <div className="flex flex-col items-center gap-3">
+      <svg
+        width={size} height={size} viewBox={`0 0 ${size} ${size}`}
+        className="w-[160px] h-[160px] sm:w-[200px] sm:h-[200px] md:w-[220px] md:h-[220px]"
+        style={{ filter: 'drop-shadow(0 0 24px rgba(99, 102, 241, 0.25))' }}
+      >
+        <defs>
+          <linearGradient id="hero-radar-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="var(--primary, #6366f1)" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="var(--emerald, #10b981)" stopOpacity="0.2" />
+          </linearGradient>
+          <filter id="hero-radar-glow">
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
+
+        {/* Grid */}
+        {gridLevels.map((level, i) => (
+          <polygon key={i} points={getPoints(Array(6).fill(level))}
+            fill="none" stroke="var(--border-glass, rgba(255,255,255,0.06))" strokeWidth="0.8" />
+        ))}
+
+        {/* Axes */}
+        {axes.map((a, i) => (
+          <line key={i} x1={cx} y1={cy} x2={a.x} y2={a.y}
+            stroke="var(--border-glass, rgba(255,255,255,0.08))" strokeWidth="0.8" />
+        ))}
+
+        {/* Filled polygon */}
+        <polygon points={getPoints(animatedValues)} fill="url(#hero-radar-grad)" />
+
+        {/* Stroke polygon with glow */}
+        <polygon points={getPoints(animatedValues)} fill="none"
+          stroke="var(--primary, #6366f1)" strokeWidth="2" strokeLinejoin="round"
+          filter="url(#hero-radar-glow)" opacity="0.8" />
+
+        {/* Data points */}
+        {dataPoints.map((pt, i) => (
+          <g key={i}>
+            <circle cx={pt.x} cy={pt.y} r={5} fill={TRAIT_COLORS[i]} opacity={0.25}>
+              <animate attributeName="r" values="4;7;4" dur={`${2 + i * 0.4}s`} repeatCount="indefinite" />
+            </circle>
+            <circle cx={pt.x} cy={pt.y} r={3} fill={TRAIT_COLORS[i]} stroke="var(--bg-void, #0f0b2e)" strokeWidth="1" />
+          </g>
+        ))}
+
+        {/* Labels with animated values */}
+        {labelPositions.map((pos, i) => (
+          <g key={i}>
+            <text x={pos.x} y={pos.y - 6} textAnchor="middle" dominantBaseline="middle"
+              fill={TRAIT_COLORS[i]} fontSize="13" fontFamily="'JetBrains Mono', monospace" fontWeight="700">
+              {TRAIT_KEYS_ORDER[i]}
+            </text>
+            <text x={pos.x} y={pos.y + 9} textAnchor="middle" dominantBaseline="middle"
+              fill="var(--text-tertiary, rgba(255,255,255,0.5))" fontSize="10" fontFamily="'JetBrains Mono', monospace">
+              {animatedValues[i].toFixed(2)}
+            </text>
+          </g>
+        ))}
+
+        <circle cx={cx} cy={cy} r={1.5} fill="var(--text-tertiary, rgba(255,255,255,0.3))" />
+      </svg>
+
+      {/* Preset name with smooth transition */}
+      <div
+        className="text-xs font-mono tracking-[0.15em] font-semibold uppercase"
+        style={{ color: preset.color, transition: 'opacity 0.25s ease', opacity: nameOpacity }}
+      >
         {preset.name}
       </div>
     </div>
