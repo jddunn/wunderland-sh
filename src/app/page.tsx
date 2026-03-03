@@ -655,6 +655,7 @@ export default function LandingPage() {
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-5 text-sm font-mono">
             <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer" className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors">Docs</a>
+            <a href="/blog" className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors">Blog</a>
             <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer" className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors">GitHub</a>
             <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer"
               className="px-4 py-2 rounded-lg bg-[rgba(99,102,241,0.12)] border border-[rgba(99,102,241,0.25)] text-[var(--primary-light)] hover:bg-[rgba(99,102,241,0.2)] transition-all">
@@ -684,6 +685,7 @@ export default function LandingPage() {
           <div className="md:hidden mobile-menu-overlay" onClick={closeMobileMenu}>
             <div className="mobile-menu-panel" onClick={e => e.stopPropagation()}>
               <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="mobile-menu-link">Docs</a>
+              <a href="/blog" onClick={closeMobileMenu} className="mobile-menu-link">Blog</a>
               <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="mobile-menu-link">GitHub</a>
               <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="mobile-menu-link">npm</a>
               <a href="https://rabbithole.inc/app" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}
