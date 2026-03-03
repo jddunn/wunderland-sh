@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { WunderlandIcon, RabbitHoleIcon } from '@/components/brand';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { HexacoRadar } from '@/components/HexacoRadar';
 import { useScrollReveal, useScrollRevealGroup } from '@/lib/useScrollReveal';
 import { useTilt } from '@/lib/useTilt';
 
@@ -411,7 +412,94 @@ function ScreenshotGrid() {
    Main Page
    ============================================================ */
 
+/* ============================================================
+   GitHub Stats
+   ============================================================ */
+
+function GitHubStats() {
+  const [stats, setStats] = useState<{ stars: number; forks: number } | null>(null);
+
+  useEffect(() => {
+    fetch('https://api.github.com/repos/jddunn/wunderland')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (data?.stargazers_count != null) {
+          setStats({ stars: data.stargazers_count, forks: data.forks_count });
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  if (!stats) return null;
+
+  return (
+    <div className="flex items-center justify-center gap-4 text-xs font-mono text-[var(--text-tertiary)] mt-4">
+      <a href="https://github.com/jddunn/wunderland/stargazers" target="_blank" rel="noopener noreferrer"
+        className="flex items-center gap-1.5 hover:text-[var(--accent)] transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279L0 9.306l8.332-1.151z" /></svg>
+        {stats.stars.toLocaleString()} stars
+      </a>
+      <span className="text-[var(--border-glass)]">|</span>
+      <a href="https://github.com/jddunn/wunderland/network/members" target="_blank" rel="noopener noreferrer"
+        className="flex items-center gap-1.5 hover:text-[var(--accent)] transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v1a2 2 0 01-2 2H8a2 2 0 01-2-2V9"/><line x1="12" y1="12" x2="12" y2="15"/></svg>
+        {stats.forks.toLocaleString()} forks
+      </a>
+    </div>
+  );
+}
+
+/* ============================================================
+   Hero Radar — cycles through presets
+   ============================================================ */
+
+function HeroRadar() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setActiveIndex(i => (i + 1) % PRESETS.length);
+        setFade(true);
+      }, 300);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const preset = PRESETS[activeIndex];
+  const radarTraits = {
+    honesty: preset.traits.H,
+    emotionality: preset.traits.E,
+    extraversion: preset.traits.X,
+    agreeableness: preset.traits.A,
+    conscientiousness: preset.traits.C,
+    openness: preset.traits.O,
+  };
+
+  return (
+    <div className="flex flex-col items-center" style={{ transition: 'opacity 0.3s ease', opacity: fade ? 1 : 0 }}>
+      <HexacoRadar traits={radarTraits} size={180} animated showLabels glowColor="var(--primary, #6366f1)" className="w-[140px] h-[140px] sm:w-[180px] sm:h-[180px]" />
+      <div className="mt-2 text-xs font-mono tracking-wider" style={{ color: preset.color }}>
+        {preset.name}
+      </div>
+    </div>
+  );
+}
+
 export default function LandingPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') setMobileMenuOpen(false); };
+    document.addEventListener('keydown', handler);
+    document.body.style.overflow = 'hidden';
+    return () => { document.removeEventListener('keydown', handler); document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
+
   const heroReveal = useScrollReveal();
   const statsReveal = useScrollRevealGroup();
   const featuresReveal = useScrollRevealGroup();
@@ -427,12 +515,14 @@ export default function LandingPage() {
     <div className="relative">
       {/* ─── Navigation ─── */}
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[var(--bg-void)]/80 border-b border-[var(--border-glass)]">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3">
             <WunderlandIcon size={34} id="nav-wl" />
             <span className="font-display font-bold text-base tracking-wide">WUNDERLAND</span>
           </a>
-          <div className="flex items-center gap-5 text-sm font-mono">
+
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-5 text-sm font-mono">
             <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer" className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors">Docs</a>
             <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer" className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors">GitHub</a>
             <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer"
@@ -441,12 +531,38 @@ export default function LandingPage() {
             </a>
             <a href="https://rabbithole.inc" target="_blank" rel="noopener noreferrer"
               className="nav-rabbithole-btn">
-              <RabbitHoleIcon size={18} />
+              <RabbitHoleIcon size={18} transparent id="nav-rh" />
               <span>Try the Web UI</span>
             </a>
             <ThemeToggle />
           </div>
+
+          {/* Mobile hamburger + theme */}
+          <div className="flex md:hidden items-center gap-3">
+            <ThemeToggle />
+            <button type="button" onClick={() => setMobileMenuOpen(o => !o)} className="mobile-hamburger" aria-label="Toggle menu" aria-expanded={mobileMenuOpen}>
+              <span className={`hamburger-line ${mobileMenuOpen ? 'hamburger-open' : ''}`} />
+              <span className={`hamburger-line ${mobileMenuOpen ? 'hamburger-open' : ''}`} />
+              <span className={`hamburger-line ${mobileMenuOpen ? 'hamburger-open' : ''}`} />
+            </button>
+          </div>
         </div>
+
+        {/* Mobile menu overlay */}
+        {mobileMenuOpen && (
+          <div className="md:hidden mobile-menu-overlay" onClick={closeMobileMenu}>
+            <div className="mobile-menu-panel" onClick={e => e.stopPropagation()}>
+              <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="mobile-menu-link">Docs</a>
+              <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="mobile-menu-link">GitHub</a>
+              <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="mobile-menu-link">npm</a>
+              <a href="https://rabbithole.inc" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}
+                className="mobile-menu-link flex items-center gap-2">
+                <RabbitHoleIcon size={18} transparent id="mobile-rh" />
+                Try the Web UI
+              </a>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* ─── Hero ─── */}
@@ -454,7 +570,7 @@ export default function LandingPage() {
         <HeroParticles />
         <div ref={heroReveal.ref} className={`relative z-10 text-center animate-in ${heroReveal.isVisible ? 'visible' : ''}`}>
           <div className="mb-6">
-            <WunderlandIcon size={80} id="hero-wl" />
+            <HeroRadar />
           </div>
 
           <h1 className="font-display font-bold text-5xl sm:text-6xl md:text-8xl tracking-tight mb-4">
@@ -475,8 +591,8 @@ export default function LandingPage() {
           </p>
 
           {/* Install command */}
-          <div className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-[rgba(99,102,241,0.08)] border border-[rgba(99,102,241,0.2)] mb-8">
-            <span className="font-mono text-sm">
+          <div className="inline-flex items-center gap-3 px-4 sm:px-5 py-3 rounded-xl bg-[rgba(99,102,241,0.08)] border border-[rgba(99,102,241,0.2)] mb-8 max-w-full">
+            <span className="font-mono text-xs sm:text-sm truncate">
               <span className="text-[var(--accent)]">$</span>{' '}
               <span className="text-[var(--text-primary)]">npm install -g wunderland</span>
             </span>
@@ -494,6 +610,8 @@ export default function LandingPage() {
               View Source
             </a>
           </div>
+
+          <GitHubStats />
         </div>
       </section>
 

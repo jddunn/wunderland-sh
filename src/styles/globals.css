@@ -125,13 +125,11 @@ html.light .terminal-header {
   border-bottom-color: rgba(166, 124, 64, 0.2);
 }
 
-html.light .terminal-body .cmd,
-html.light .terminal-body .flag,
-html.light .terminal-body .output,
-html.light .terminal-body .comment,
-html.light .terminal-body .prompt {
-  /* Keep terminal text light inside dark terminal */
-}
+html.light .terminal-body .cmd { color: #f0eeff; }
+html.light .terminal-body .flag { color: #818cf8; }
+html.light .terminal-body .output { color: #10b981; }
+html.light .terminal-body .comment { color: rgba(240, 238, 255, 0.50); }
+html.light .terminal-body .prompt { color: #f59e0b; }
 
 html.light .hero-glow {
   text-shadow:
@@ -229,6 +227,93 @@ html.light .deco-section-divider line {
   border-color: rgba(245, 158, 11, 0.5);
   box-shadow: 0 0 12px rgba(245, 158, 11, 0.15);
   color: var(--accent-light);
+}
+
+/* ---- Mobile Navigation ---- */
+.mobile-hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  background: none;
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.mobile-hamburger:hover {
+  border-color: var(--border-glow);
+}
+
+.hamburger-line {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--text-secondary);
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+
+.hamburger-line.hamburger-open:nth-child(1) {
+  transform: rotate(45deg) translateY(5px) translateX(3px);
+}
+
+.hamburger-line.hamburger-open:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-line.hamburger-open:nth-child(3) {
+  transform: rotate(-45deg) translateY(-5px) translateX(3px);
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 64px 0 0 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 40;
+  animation: fadeIn 0.2s ease;
+}
+
+.mobile-menu-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.mobile-menu-link {
+  display: block;
+  padding: 14px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 10px;
+  transition: all 0.15s;
+}
+
+.mobile-menu-link:hover,
+.mobile-menu-link:active {
+  background: var(--bg-glass-hover);
+  color: var(--text-primary);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ---- Light mode nav contrast fix ---- */
+html.light nav a {
+  color: var(--text-primary);
+}
+
+html.light .mobile-menu-link {
+  color: var(--text-primary);
 }
 
 /* ---- Screenshot Tabs ---- */
@@ -475,7 +560,11 @@ body::after {
   outline-offset: 3px;
 }
 
-.font-display { font-family: 'Syne', system-ui, sans-serif; }
+.font-display {
+  font-family: 'Syne', system-ui, sans-serif;
+  line-height: 1.35;
+  overflow: visible;
+}
 .font-mono { font-family: 'JetBrains Mono', 'Space Mono', monospace; }
 
 /* ---- Glass Card ---- */

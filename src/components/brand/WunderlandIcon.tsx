@@ -1,5 +1,7 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+
 interface WunderlandIconProps {
   size?: number;
   className?: string;
@@ -7,43 +9,70 @@ interface WunderlandIconProps {
 }
 
 export function WunderlandIcon({ size = 64, className = '', id = 'wl-icon' }: WunderlandIconProps) {
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsLight(document.documentElement.classList.contains('light'));
+    check();
+    const observer = new MutationObserver(check);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
+  // Adaptive frame colors
+  const frameStart = isLight ? '#d4c5a0' : '#1e1b4b';
+  const frameMid = isLight ? '#e8ddd0' : '#0f0b2e';
+  const frameEnd = isLight ? '#d4c5a0' : '#1e1b4b';
+  const mirrorStart = isLight ? 'rgba(107, 79, 32, 0.3)' : 'rgba(49, 46, 129, 0.7)';
+  const mirrorMid = isLight ? 'rgba(107, 79, 32, 0.15)' : 'rgba(67, 56, 202, 0.4)';
+  const mirrorEnd = isLight ? 'rgba(107, 79, 32, 0.05)' : 'rgba(49, 46, 129, 0.15)';
+  const shadowOpacity = isLight ? '0.15' : '0.5';
+
+  // Stroke colors adapt
+  const indigoStart = isLight ? '#7a5a18' : '#6366f1';
+  const indigoMid = isLight ? '#8b6914' : '#818cf8';
+  const indigoEnd = isLight ? '#a67c40' : '#a78bfa';
+  const amberStart = isLight ? '#996b08' : '#d97706';
+  const amberMid = isLight ? '#b8860b' : '#f59e0b';
+  const amberEnd = isLight ? '#c49a52' : '#fbbf24';
+
   return (
     <svg width={size} height={size} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className={className}>
       <defs>
         <linearGradient id={`grad-indigo-${id}`} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#6366f1" />
-          <stop offset="50%" stopColor="#818cf8" />
-          <stop offset="100%" stopColor="#a78bfa" />
+          <stop offset="0%" stopColor={indigoStart} />
+          <stop offset="50%" stopColor={indigoMid} />
+          <stop offset="100%" stopColor={indigoEnd} />
         </linearGradient>
         <linearGradient id={`grad-amber-${id}`} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#d97706" />
-          <stop offset="50%" stopColor="#f59e0b" />
-          <stop offset="100%" stopColor="#fbbf24" />
+          <stop offset="0%" stopColor={amberStart} />
+          <stop offset="50%" stopColor={amberMid} />
+          <stop offset="100%" stopColor={amberEnd} />
         </linearGradient>
         <linearGradient id={`grad-frame-${id}`} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#1e1b4b" />
-          <stop offset="50%" stopColor="#0f0b2e" />
-          <stop offset="100%" stopColor="#1e1b4b" />
+          <stop offset="0%" stopColor={frameStart} />
+          <stop offset="50%" stopColor={frameMid} />
+          <stop offset="100%" stopColor={frameEnd} />
         </linearGradient>
         <linearGradient id={`grad-mirror-${id}`} x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#312e81" stopOpacity="0.7" />
-          <stop offset="50%" stopColor="#4338ca" stopOpacity="0.4" />
-          <stop offset="100%" stopColor="#312e81" stopOpacity="0.15" />
+          <stop offset="0%" stopColor={mirrorStart} />
+          <stop offset="50%" stopColor={mirrorMid} />
+          <stop offset="100%" stopColor={mirrorEnd} />
         </linearGradient>
         <linearGradient id={`grad-shimmer-${id}`} x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#6366f1" stopOpacity="0.2" />
-          <stop offset="30%" stopColor="#818cf8" stopOpacity="0.8" />
+          <stop offset="0%" stopColor={indigoStart} stopOpacity="0.2" />
+          <stop offset="30%" stopColor={indigoMid} stopOpacity="0.8" />
           <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
-          <stop offset="70%" stopColor="#fbbf24" stopOpacity="0.8" />
-          <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.2" />
+          <stop offset="70%" stopColor={amberEnd} stopOpacity="0.8" />
+          <stop offset="100%" stopColor={amberMid} stopOpacity="0.2" />
         </linearGradient>
         <linearGradient id={`grad-reflect-${id}`} x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#818cf8" stopOpacity="0.5" />
-          <stop offset="40%" stopColor="#6366f1" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="#4f46e5" stopOpacity="0.06" />
+          <stop offset="0%" stopColor={indigoMid} stopOpacity="0.5" />
+          <stop offset="40%" stopColor={indigoStart} stopOpacity="0.25" />
+          <stop offset="100%" stopColor={indigoStart} stopOpacity="0.06" />
         </linearGradient>
         <filter id={`shadow-${id}`} x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.5" />
+          <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#000" floodOpacity={shadowOpacity} />
         </filter>
       </defs>
 
