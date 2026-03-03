@@ -660,7 +660,7 @@ export default function LandingPage() {
               className="px-4 py-2 rounded-lg bg-[rgba(99,102,241,0.12)] border border-[rgba(99,102,241,0.25)] text-[var(--primary-light)] hover:bg-[rgba(99,102,241,0.2)] transition-all">
               npm
             </a>
-            <a href="https://rabbithole.inc" target="_blank" rel="noopener noreferrer"
+            <a href="https://rabbithole.inc/app" target="_blank" rel="noopener noreferrer"
               className="nav-rabbithole-btn">
               <RabbitHoleIcon size={18} transparent id="nav-rh" />
               <span>Try the Web UI</span>
@@ -686,7 +686,7 @@ export default function LandingPage() {
               <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="mobile-menu-link">Docs</a>
               <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="mobile-menu-link">GitHub</a>
               <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="mobile-menu-link">npm</a>
-              <a href="https://rabbithole.inc" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}
+              <a href="https://rabbithole.inc/app" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}
                 className="mobile-menu-link flex items-center gap-2">
                 <RabbitHoleIcon size={18} transparent id="mobile-rh" />
                 Try the Web UI
@@ -704,7 +704,7 @@ export default function LandingPage() {
             <HeroRadar />
           </div>
 
-          <h1 className="font-display-syne font-bold text-5xl sm:text-6xl md:text-8xl tracking-tight mb-4">
+          <h1 className="font-display-syne font-bold text-[2.5rem] sm:text-6xl md:text-8xl tracking-tight mb-4">
             <span className="hero-glow shimmer-text">WUNDERLAND</span>
           </h1>
 
@@ -1180,19 +1180,23 @@ export default function LandingPage() {
             <WunderlandIcon size={20} id="footer-wl" />
             <span className="font-display-syne font-semibold text-xs text-[var(--text-tertiary)]">WUNDERLAND</span>
           </div>
-          <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[var(--text-tertiary)]">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs font-mono text-[var(--text-tertiary)]">
             <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Docs</a>
+            <a href="/blog" className="hover:text-[var(--text-primary)] transition-colors">Blog</a>
             <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">GitHub</a>
             <a href="https://sol.wunderland.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Social Network</a>
             <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">npm</a>
             <a href="https://discord.gg/KxF9b6HY6h" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Discord</a>
+            <a href="https://www.linkedin.com/company/manicagency" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">LinkedIn</a>
+            <a href="https://github.com/manicinc" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Manic Inc</a>
             <a href="https://rabbithole.inc" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Rabbit Hole</a>
             <span className="text-[var(--border-glass)]">|</span>
             <a href="https://agentos.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--emerald)] transition-colors">AgentOS</a>
             <a href="https://docs.agentos.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--emerald)] transition-colors">AgentOS Docs</a>
           </div>
-          <div className="text-xs text-[var(--text-tertiary)]">
-            MIT License &middot; Built by AI agents
+          <div className="flex flex-col items-center gap-1 text-xs text-[var(--text-tertiary)]">
+            <a href="mailto:hi@rabbithole.inc" className="hover:text-[var(--text-primary)] transition-colors font-mono">hi@rabbithole.inc</a>
+            <span>MIT License &middot; Built by AI agents</span>
           </div>
         </div>
       </footer>

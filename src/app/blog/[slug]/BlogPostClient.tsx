@@ -1,0 +1,148 @@
+'use client';
+
+import Link from 'next/link';
+import { WunderlandIcon } from '@/components/brand';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import type { BlogPost } from '@/data/blog-posts';
+
+function renderMarkdown(content: string): string {
+  return content
+    // Code blocks
+    .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre class="blog-code"><code>$2</code></pre>')
+    // Tables
+    .replace(/\|(.+)\|\n\|[-| :]+\|\n((?:\|.+\|\n?)*)/g, (_, header, body) => {
+      const heads = header.split('|').map((h: string) => h.trim()).filter(Boolean);
+      const rows = body.trim().split('\n').map((row: string) =>
+        row.split('|').map((c: string) => c.trim()).filter(Boolean)
+      );
+      return `<table class="blog-table"><thead><tr>${heads.map((h: string) => `<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map((r: string[]) => `<tr>${r.map((c: string) => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+    })
+    // Inline code
+    .replace(/`([^`]+)`/g, '<code class="blog-inline-code">$1</code>')
+    // Bold
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    // Links
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="blog-link" target="_blank" rel="noopener noreferrer">$1</a>')
+    // H3
+    .replace(/^### (.+)$/gm, '<h3 class="blog-h3">$1</h3>')
+    // H2
+    .replace(/^## (.+)$/gm, '<h2 class="blog-h2">$1</h2>')
+    // H4
+    .replace(/^#### (.+)$/gm, '<h4 class="blog-h4">$1</h4>')
+    // List items
+    .replace(/^- (.+)$/gm, '<li class="blog-li">$1</li>')
+    // Paragraphs (lines that aren't tags)
+    .replace(/^(?!<[a-z])((?!^\s*$).+)$/gm, (match) => {
+      if (match.startsWith('<')) return match;
+      return `<p class="blog-p">${match}</p>`;
+    })
+    // Wrap consecutive <li> in <ul>
+    .replace(/((?:<li[^>]*>.*?<\/li>\n?)+)/g, '<ul class="blog-ul">$1</ul>');
+}
+
+export default function BlogPostClient({ post }: { post: BlogPost }) {
+  return (
+    <div className="relative min-h-screen">
+      {/* Nav */}
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[var(--bg-void)]/80 border-b border-[var(--border-glass)]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+          <a href="/" className="flex items-center gap-3">
+            <WunderlandIcon size={34} id="post-nav-wl" />
+            <span className="font-display-syne font-bold text-base tracking-wide">WUNDERLAND</span>
+          </a>
+          <div className="flex items-center gap-4">
+            <Link href="/blog" className="text-sm font-mono text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors">Blog</Link>
+            <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer" className="text-sm font-mono text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors hidden sm:inline">Docs</a>
+            <ThemeToggle />
+          </div>
+        </div>
+      </nav>
+
+      {/* Article */}
+      <article className="pt-28 pb-16 px-6">
+        <div className="max-w-3xl mx-auto">
+          {/* Back link */}
+          <Link href="/blog" className="inline-flex items-center gap-1 text-xs font-mono text-[var(--text-tertiary)] hover:text-[var(--primary-light)] transition-colors mb-8">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
+            All posts
+          </Link>
+
+          {/* Header */}
+          <header className="mb-10">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <time className="text-xs font-mono text-[var(--text-tertiary)]">{post.date}</time>
+              <span className="text-xs text-[var(--border-glass)]">&middot;</span>
+              <span className="text-xs font-mono text-[var(--text-tertiary)]">{post.readTime} read</span>
+              <span className="text-xs text-[var(--border-glass)]">&middot;</span>
+              <span className="text-xs font-mono text-[var(--text-tertiary)]">{post.author}</span>
+            </div>
+            <h1 className="font-display-syne font-bold text-2xl sm:text-3xl md:text-4xl tracking-tight leading-tight mb-4">
+              {post.title}
+            </h1>
+            <p className="text-[var(--text-secondary)] text-base sm:text-lg leading-relaxed">
+              {post.description}
+            </p>
+            <div className="flex flex-wrap gap-2 mt-4">
+              {post.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-[0.625rem] font-mono px-2 py-0.5 rounded-full border border-[var(--border-glass)] text-[var(--text-tertiary)]"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </header>
+
+          {/* Content */}
+          <div
+            className="blog-content"
+            dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }}
+          />
+
+          {/* CTA */}
+          <div className="mt-16 glass-card p-8 text-center">
+            <h3 className="font-display-syne font-bold text-xl mb-3">Try Wunderland</h3>
+            <p className="text-[var(--text-secondary)] text-sm mb-6 max-w-md mx-auto">
+              Free, open-source, MIT-licensed. Install with npm and deploy your first autonomous AI agent in minutes.
+            </p>
+            <div className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-[rgba(99,102,241,0.08)] border border-[rgba(99,102,241,0.2)] mb-4 font-mono text-sm">
+              <span className="text-[var(--accent)]">$</span>{' '}
+              <span className="text-[var(--text-primary)]">npm install -g wunderland</span>
+            </div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-4">
+              <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer"
+                className="px-5 py-2.5 rounded-xl font-display font-semibold text-sm bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white transition-all">
+                Read the Docs
+              </a>
+              <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer"
+                className="px-5 py-2.5 rounded-xl font-display font-semibold text-sm border border-[var(--border-glass)] hover:border-[var(--border-glow)] text-[var(--text-secondary)] transition-all">
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      {/* Footer */}
+      <footer className="border-t border-[var(--border-glass)] py-10 px-6">
+        <div className="max-w-4xl mx-auto flex flex-col items-center gap-4 text-center">
+          <div className="flex items-center gap-2">
+            <WunderlandIcon size={20} id="post-footer-wl" />
+            <span className="font-display-syne font-semibold text-xs text-[var(--text-tertiary)]">WUNDERLAND</span>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-[var(--text-tertiary)]">
+            <a href="/" className="hover:text-[var(--text-primary)] transition-colors">Home</a>
+            <Link href="/blog" className="hover:text-[var(--text-primary)] transition-colors">Blog</Link>
+            <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Docs</a>
+            <a href="https://github.com/manicinc" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Manic Inc</a>
+            <a href="https://www.linkedin.com/company/manicagency" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">LinkedIn</a>
+            <a href="https://rabbithole.inc" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Rabbit Hole</a>
+            <a href="mailto:hi@rabbithole.inc" className="hover:text-[var(--text-primary)] transition-colors">hi@rabbithole.inc</a>
+          </div>
+          <div className="text-xs text-[var(--text-tertiary)]">MIT License &middot; Built by AI agents</div>
+        </div>
+      </footer>
+    </div>
+  );
+}
