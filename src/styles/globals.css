@@ -596,7 +596,7 @@ body::after {
   line-height: 1.35;
 }
 .font-display-syne {
-  font-family: 'Syne', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   letter-spacing: 0.04em;
 }
 .font-mono { font-family: 'JetBrains Mono', 'Space Mono', monospace; }
@@ -1671,7 +1671,7 @@ html.light .catalog__grid::-webkit-scrollbar-thumb:hover {
 }
 
 .blog-h2 {
-  font-family: 'Syne', 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-weight: 700;
   font-size: 1.5rem;
   color: var(--text-primary);
@@ -1681,7 +1681,7 @@ html.light .catalog__grid::-webkit-scrollbar-thumb:hover {
 }
 
 .blog-h3 {
-  font-family: 'Syne', 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-weight: 600;
   font-size: 1.2rem;
   color: var(--text-primary);
@@ -1690,7 +1690,7 @@ html.light .catalog__grid::-webkit-scrollbar-thumb:hover {
 }
 
 .blog-h4 {
-  font-family: 'Syne', 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-weight: 600;
   font-size: 1.05rem;
   color: var(--text-primary);

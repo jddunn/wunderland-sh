@@ -1,7 +1,8 @@
 'use client';
 
+import { useState, useCallback } from 'react';
 import Link from 'next/link';
-import { WunderlandIcon } from '@/components/brand';
+import { WunderlandIcon, RabbitHoleIcon } from '@/components/brand';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { BLOG_POSTS } from '@/data/blog-posts';
 
@@ -22,22 +23,63 @@ function tagColor(tag: string): string {
 }
 
 export default function BlogIndex() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
+
   return (
     <div className="relative min-h-screen">
-      {/* Nav */}
+      {/* Nav — matches main page */}
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[var(--bg-void)]/80 border-b border-[var(--border-glass)]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3">
             <WunderlandIcon size={34} id="blog-nav-wl" />
             <span className="font-display-syne font-bold text-base tracking-wide">WUNDERLAND</span>
           </a>
-          <div className="flex items-center gap-4">
-            <Link href="/blog" className="text-sm font-mono text-[var(--primary-light)]">Blog</Link>
-            <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer" className="text-sm font-mono text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors hidden sm:inline">Docs</a>
-            <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer" className="text-sm font-mono text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors hidden sm:inline">GitHub</a>
+
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-5 text-sm font-mono">
+            <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer" className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors">Docs</a>
+            <a href="/blog" className="text-[var(--primary-light)]">Blog</a>
+            <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer" className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors">GitHub</a>
+            <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer"
+              className="px-4 py-2 rounded-lg bg-[rgba(99,102,241,0.12)] border border-[rgba(99,102,241,0.25)] text-[var(--primary-light)] hover:bg-[rgba(99,102,241,0.2)] transition-all">
+              npm
+            </a>
+            <a href="https://rabbithole.inc/app" target="_blank" rel="noopener noreferrer"
+              className="nav-rabbithole-btn">
+              <RabbitHoleIcon size={18} transparent id="blog-nav-rh" />
+              <span>Try the Web UI</span>
+            </a>
             <ThemeToggle />
           </div>
+
+          {/* Mobile hamburger + theme */}
+          <div className="flex md:hidden items-center gap-3">
+            <ThemeToggle />
+            <button type="button" onClick={() => setMobileMenuOpen(o => !o)} className="mobile-hamburger" aria-label="Toggle menu" aria-expanded={mobileMenuOpen}>
+              <span className={`hamburger-line ${mobileMenuOpen ? 'hamburger-open' : ''}`} />
+              <span className={`hamburger-line ${mobileMenuOpen ? 'hamburger-open' : ''}`} />
+              <span className={`hamburger-line ${mobileMenuOpen ? 'hamburger-open' : ''}`} />
+            </button>
+          </div>
         </div>
+
+        {/* Mobile menu overlay */}
+        {mobileMenuOpen && (
+          <div className="md:hidden mobile-menu-overlay" onClick={closeMobileMenu}>
+            <div className="mobile-menu-panel" onClick={e => e.stopPropagation()}>
+              <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="mobile-menu-link">Docs</a>
+              <a href="/blog" onClick={closeMobileMenu} className="mobile-menu-link">Blog</a>
+              <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="mobile-menu-link">GitHub</a>
+              <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="mobile-menu-link">npm</a>
+              <a href="https://rabbithole.inc/app" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}
+                className="mobile-menu-link flex items-center gap-2">
+                <RabbitHoleIcon size={18} transparent id="blog-mobile-rh" />
+                Try the Web UI
+              </a>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero */}
@@ -88,24 +130,30 @@ export default function BlogIndex() {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer — matches main page */}
       <footer className="border-t border-[var(--border-glass)] py-10 px-6">
-        <div className="max-w-4xl mx-auto flex flex-col items-center gap-4 text-center">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
             <WunderlandIcon size={20} id="blog-footer-wl" />
             <span className="font-display-syne font-semibold text-xs text-[var(--text-tertiary)]">WUNDERLAND</span>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-[var(--text-tertiary)]">
-            <a href="/" className="hover:text-[var(--text-primary)] transition-colors">Home</a>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs font-mono text-[var(--text-tertiary)]">
             <a href="https://docs.wunderland.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Docs</a>
+            <a href="/blog" className="hover:text-[var(--text-primary)] transition-colors">Blog</a>
             <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">GitHub</a>
-            <a href="https://github.com/manicinc" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Manic Inc</a>
+            <a href="https://sol.wunderland.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Social Network</a>
+            <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">npm</a>
+            <a href="https://discord.gg/KxF9b6HY6h" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Discord</a>
             <a href="https://www.linkedin.com/company/manicagency" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">LinkedIn</a>
+            <a href="https://github.com/manicinc" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Manic Inc</a>
             <a href="https://rabbithole.inc" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Rabbit Hole</a>
-            <a href="mailto:hi@rabbithole.inc" className="hover:text-[var(--text-primary)] transition-colors">hi@rabbithole.inc</a>
+            <span className="text-[var(--border-glass)]">|</span>
+            <a href="https://agentos.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--emerald)] transition-colors">AgentOS</a>
+            <a href="https://docs.agentos.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--emerald)] transition-colors">AgentOS Docs</a>
           </div>
-          <div className="text-xs text-[var(--text-tertiary)]">
-            MIT License &middot; Built by AI agents
+          <div className="flex flex-col items-center gap-1 text-xs text-[var(--text-tertiary)]">
+            <a href="mailto:hi@rabbithole.inc" className="hover:text-[var(--text-primary)] transition-colors font-mono">hi@rabbithole.inc</a>
+            <span>MIT License &middot; Built by AI agents</span>
           </div>
         </div>
       </footer>
