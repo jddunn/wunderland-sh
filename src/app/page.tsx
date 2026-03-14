@@ -46,6 +46,18 @@ const FEATURES = [
     ),
   },
   {
+    title: 'Voice & Speech',
+    desc: 'Built-in TTS (OpenAI, ElevenLabs, Piper) and STT (Whisper, Deepgram, local). Cloud or fully offline — zero extra config if you have an OpenAI key.',
+    color: 'var(--accent)',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="23" />
+        <line x1="8" y1="23" x2="16" y2="23" />
+      </svg>
+    ),
+  },
+  {
     title: 'Unlimited Memory',
     desc: 'Multi-tier RAG: working memory, long-term semantic, episodic timeline, GraphRAG entity relationships, and shared agency memory.',
     color: 'var(--cyan)',
@@ -733,7 +745,7 @@ export default function LandingPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a href="https://docs.wunderland.sh/docs/getting-started/quickstart" target="_blank" rel="noopener noreferrer"
+            <a href="https://docs.wunderland.sh/docs/tutorials/first-agent" target="_blank" rel="noopener noreferrer"
               className="px-6 py-3 rounded-xl font-display font-semibold text-sm bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white transition-all shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]">
               Get Started
             </a>
@@ -874,9 +886,9 @@ export default function LandingPage() {
         </div>
 
         <div className="text-center mt-8">
-          <a href="https://docs.wunderland.sh/docs/use-cases/autonomous-web-agent" target="_blank" rel="noopener noreferrer"
+          <a href="https://docs.wunderland.sh/docs/tutorials/first-agent" target="_blank" rel="noopener noreferrer"
             className="text-sm font-mono text-[var(--accent)] hover:text-[var(--accent-light)] transition-colors">
-            Read the full use case guides &rarr;
+            Read the tutorials &amp; use case guides &rarr;
           </a>
         </div>
       </section>
@@ -907,17 +919,19 @@ export default function LandingPage() {
               <div><span className="prompt">$</span> <span className="cmd">wunderland</span> <span className="flag">setup</span></div>
               <div className="output">  Choose a preset: Research Assistant</div>
               <div className="output">  LLM Provider: openai (gpt-4o)</div>
-              <div className="output">  Skills: web-search, summarize, github</div>
-              <div className="output">  Channel: telegram</div>
+              <div className="output">  Personality: Analytical</div>
+              <div className="output">  Voice: OpenAI TTS (nova) + Whisper STT</div>
+              <div className="output">  RAG Memory: hybrid + auto-ingest</div>
+              <div className="mt-2"><span className="comment"># Test voice synthesis</span></div>
+              <div><span className="prompt">$</span> <span className="cmd">wunderland</span> <span className="flag">voice test</span> <span className="string">&quot;Hello from Wunderland&quot;</span></div>
+              <div className="output">  TTS: openai (tts-1, voice: nova)  ✓ ready</div>
               <div className="mt-2"><span className="comment"># Start chatting</span></div>
               <div><span className="prompt">$</span> <span className="cmd">wunderland</span> <span className="flag">chat</span></div>
               <div className="output">  Agent &quot;Research Assistant&quot; ready.</div>
               <div className="output">  HEXACO: H:0.9 E:0.3 X:0.4 A:0.7 C:0.95 O:0.85</div>
-              <div className="output">  Mood: NEUTRAL (P:0.0 A:0.0 D:0.0)</div>
               <div className="mt-2"><span className="comment"># Or launch as a server</span></div>
               <div><span className="prompt">$</span> <span className="cmd">wunderland</span> <span className="flag">start</span></div>
               <div className="output">  Server listening on :3000</div>
-              <div className="output">  Telegram channel connected.</div>
             </div>
           </div>
         </div>
@@ -971,7 +985,7 @@ export default function LandingPage() {
                 </div>
                 <div className="text-[var(--text-tertiary)]">
                   <span className="text-[var(--accent)]">Providers:</span>{' '}
-                  OpenAI, Anthropic, Ollama, Groq, Mistral, Cohere, Google, DeepSeek, +5 more
+                  OpenAI, Anthropic, Google Gemini, Ollama (local), OpenRouter, Groq, Mistral, DeepSeek, +5 more
                 </div>
                 <div className="text-[var(--text-tertiary)]">
                   <span className="text-[var(--emerald)]">Skills:</span>{' '}
