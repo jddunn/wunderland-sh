@@ -35,13 +35,34 @@ const FEATURES = [
     ),
   },
   {
-    title: '51+ Extensions',
-    desc: 'Browser automation, web scraping, 28 messaging channels, 13 LLM providers, 23+ tools, voice synthesis, and more.',
+    title: '100+ Extensions',
+    desc: 'Browser automation, web scraping, 37 messaging channels, 21 LLM providers, 23+ tools, voice synthesis, and more.',
     color: 'var(--emerald)',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" />
         <rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Email Intelligence',
+    desc: 'Connect Gmail for AI-powered project intelligence. Thread hierarchy reconstruction, cross-thread project detection, natural language search, and scheduled digests.',
+    color: 'var(--accent)',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+        <polyline points="22,6 12,13 2,6" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Channel Integrations',
+    desc: 'Connect WhatsApp, Slack, Signal, Telegram, Discord, Gmail, and 31 more platforms. Full setup wizard: wunderland connect <channel>.',
+    color: 'var(--primary-light)',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
       </svg>
     ),
   },
@@ -84,12 +105,12 @@ const USE_CASES = [
   },
   {
     title: 'Social Media Automation',
-    desc: 'Publish across Twitter, Instagram, Reddit, and Pinterest. Platform-specific content adaptation, scheduling, and engagement tracking.',
+    desc: 'Publish across Twitter, Instagram, LinkedIn, Threads, Reddit, Bluesky, and more. Platform-specific content adaptation, scheduling, and engagement tracking across 37 channels.',
     terminal: [
       { type: 'comment', text: '# Broadcast content across all social channels' },
       { type: 'cmd', text: 'wunderland chat --skills social-broadcast,content-creator' },
-      { type: 'output', text: '> Adapting post for 5 platforms...' },
-      { type: 'output', text: '  Twitter: 280 chars | Instagram: 2,200 chars | Reddit: r/AI' },
+      { type: 'output', text: '> Adapting post for 13 platforms...' },
+      { type: 'output', text: '  Twitter: 280 chars | LinkedIn: article | Threads: 500 chars' },
     ],
     color: 'var(--accent)',
   },
@@ -129,10 +150,10 @@ const PRESETS = [
 ];
 
 const STATS = [
-  { label: 'Extensions', value: '51+', color: 'var(--primary-light)' },
-  { label: 'Channels', value: '28', color: 'var(--accent)' },
-  { label: 'LLM Providers', value: '13', color: 'var(--emerald)' },
-  { label: 'Skills', value: '18', color: 'var(--cyan)' },
+  { label: 'Extensions', value: '100+', color: 'var(--primary-light)' },
+  { label: 'Channels', value: '37', color: 'var(--accent)' },
+  { label: 'LLM Providers', value: '21', color: 'var(--emerald)' },
+  { label: 'Skills', value: '40', color: 'var(--cyan)' },
   { label: 'CLI Commands', value: '28', color: 'var(--rose)' },
 ];
 
@@ -263,7 +284,7 @@ const SCREENSHOTS_CLI = [
   },
   {
     title: 'LLM Providers',
-    caption: 'wunderland models — 13 providers from OpenAI to Ollama',
+    caption: 'wunderland models — 21 providers from OpenAI to Ollama',
     image: '/screenshots/models-grid.png',
     color: 'var(--emerald)',
   },
@@ -275,7 +296,7 @@ const SCREENSHOTS_CLI = [
   },
   {
     title: 'Skills Registry',
-    caption: 'wunderland skills — 17 curated skills from weather to coding',
+    caption: 'wunderland skills — 40 curated skills from weather to coding',
     image: '/screenshots/skills-grid.png',
     color: 'var(--rose)',
   },
@@ -828,12 +849,12 @@ export default function LandingPage() {
           </h2>
           <p className="text-[var(--text-secondary)] text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
             An open-source framework for deploying <span className="text-[var(--text-primary)] font-semibold">autonomous AI agents</span> that
-            have real personalities, unlimited memory, browser automation, and can operate across 28 messaging
+            have real personalities, unlimited memory, browser automation, and can operate across 37 messaging
             channels — all secured with a 5-tier prompt injection defense pipeline.
           </p>
         </div>
 
-        <div ref={featuresReveal.containerRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div ref={featuresReveal.containerRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {FEATURES.map((card, i) => (
             <div key={card.title} data-reveal-index={i}
               className={`glass-card p-5 space-y-3 animate-in stagger-${i + 1} ${featuresReveal.visibleIndices.has(i) ? 'visible' : ''}`}>
@@ -929,6 +950,12 @@ export default function LandingPage() {
               <div><span className="prompt">$</span> <span className="cmd">wunderland</span> <span className="flag">chat</span></div>
               <div className="output">  Agent &quot;Research Assistant&quot; ready.</div>
               <div className="output">  HEXACO: H:0.9 E:0.3 X:0.4 A:0.7 C:0.95 O:0.85</div>
+              <div className="mt-2"><span className="comment"># Connect Gmail for email intelligence</span></div>
+              <div><span className="prompt">$</span> <span className="cmd">wunderland</span> <span className="flag">connect gmail</span></div>
+              <div className="output">  OAuth flow started... Gmail connected.</div>
+              <div className="mt-2"><span className="comment"># Connect WhatsApp</span></div>
+              <div><span className="prompt">$</span> <span className="cmd">wunderland</span> <span className="flag">connect whatsapp</span></div>
+              <div className="output">  Scan QR code... WhatsApp linked.</div>
               <div className="mt-2"><span className="comment"># Or launch as a server</span></div>
               <div><span className="prompt">$</span> <span className="cmd">wunderland</span> <span className="flag">start</span></div>
               <div className="output">  Server listening on :3000</div>
@@ -974,31 +1001,31 @@ export default function LandingPage() {
                 <span className="gradient-text-violet">Massive Ecosystem</span>
               </h2>
               <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-6">
-                28 messaging channels. 13 LLM providers. 23+ tools. 18 curated skills.
+                37 messaging channels. 21 LLM providers. 23+ tools. 40 curated skills.
                 Browser automation with Playwright. CAPTCHA solving. Proxy rotation.
-                Voice synthesis. Deep research. And a Planning Engine that ties it all together.
+                Voice synthesis. Deep research. Email intelligence. And a Planning Engine that ties it all together.
               </p>
               <div className="space-y-2 text-sm font-mono">
                 <div className="text-[var(--text-tertiary)]">
                   <span className="text-[var(--primary-light)]">Channels:</span>{' '}
-                  Telegram, WhatsApp, Discord, Slack, Email, SMS, Signal, Twitter, Instagram, Reddit, +18 more
+                  Telegram, WhatsApp, Discord, Slack, Gmail, SMS, Signal, Twitter, Instagram, Reddit, +27 more
                 </div>
                 <div className="text-[var(--text-tertiary)]">
                   <span className="text-[var(--accent)]">Providers:</span>{' '}
-                  OpenAI, Anthropic, Google Gemini, Ollama (local), OpenRouter, Groq, Mistral, DeepSeek, +5 more
+                  OpenAI, Anthropic, Google Gemini, Ollama (local), OpenRouter, Groq, Mistral, DeepSeek, +13 more
                 </div>
                 <div className="text-[var(--text-tertiary)]">
                   <span className="text-[var(--emerald)]">Skills:</span>{' '}
-                  web-scraper, deep-research, social-broadcast, twitter-bot, github, coding-agent, +12 more
+                  web-scraper, deep-research, social-broadcast, twitter-bot, github, coding-agent, +34 more
                 </div>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
               {[
-                { n: '28', label: 'Messaging\nChannels', color: 'var(--primary-light)' },
-                { n: '13', label: 'LLM\nProviders', color: 'var(--accent)' },
+                { n: '37', label: 'Messaging\nChannels', color: 'var(--primary-light)' },
+                { n: '21', label: 'LLM\nProviders', color: 'var(--accent)' },
                 { n: '23+', label: 'Built-in\nTools', color: 'var(--emerald)' },
-                { n: '18', label: 'Curated\nSkills', color: 'var(--cyan)' },
+                { n: '40', label: 'Curated\nSkills', color: 'var(--cyan)' },
                 { n: '5', label: 'Security\nTiers', color: 'var(--rose)' },
                 { n: '8', label: 'Agent\nPresets', color: 'var(--primary-light)' },
               ].map((item) => (
@@ -1023,7 +1050,7 @@ export default function LandingPage() {
               <span className="gradient-text">Skills & Extensions</span>
             </h2>
             <p className="text-[var(--text-secondary)] text-base max-w-2xl mx-auto leading-relaxed">
-              18 curated skills, 28 messaging channels, 13 LLM providers, and 15 tools — all open-source and composable.
+              40 curated skills, 37 messaging channels, 21 LLM providers, and 23+ tools — all open-source and composable.
             </p>
           </div>
           <CatalogBrowser />
@@ -1100,7 +1127,7 @@ export default function LandingPage() {
                   <p className="text-[var(--text-secondary)] text-sm md:text-base leading-relaxed max-w-2xl">
                     Wunderland is built on <strong>AgentOS</strong> — an open-source operating system for autonomous AI agents.
                     AgentOS provides the core runtime, tool orchestration, capability discovery, channel routing, and memory management
-                    that Wunderland extends with HEXACO personalities, security tiers, and 51+ extensions.
+                    that Wunderland extends with HEXACO personalities, security tiers, and 100+ extensions.
                   </p>
                 </div>
               </div>
