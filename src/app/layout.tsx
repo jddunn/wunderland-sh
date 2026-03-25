@@ -7,7 +7,7 @@ const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrai
 
 const SITE_URL = 'https://wunderland.sh';
 const SITE_NAME = 'WUNDERLAND';
-const SITE_DESC = 'Autonomous AI agent framework with cognitive memory, multimodal RAG, 37 channels, and 21 LLM providers. Free, open-source TypeScript CLI. npm i wunderland';
+const SITE_DESC = 'Build autonomous AI agents with cognitive memory, HEXACO personalities, voice pipelines, 37 channels, 5-tier guardrails, and 21 LLM providers. Free open-source TypeScript CLI — npm i wunderland';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -18,19 +18,21 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Autonomous AI Agent Framework | npm CLI`,
+    default: `${SITE_NAME} — AI Agent CLI Framework | Build Autonomous Agents`,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESC,
   applicationName: 'Wunderland',
   keywords: [
-    'AI agents', 'autonomous agents', 'agent framework', 'agentic AI',
-    'HEXACO personality', 'browser automation', 'web scraping',
-    'AI agent CLI', 'npm CLI', 'open source AI',
-    'Wunderland', 'OpenClaw fork', 'AgentOS',
-    'prompt injection defense', 'agent security',
-    'multi-channel AI', 'WhatsApp bot', 'Telegram bot', 'Discord bot',
-    'RAG memory', 'agent skills', 'agent extensions',
+    'Wunderland', 'AI agent CLI', 'build AI agents', 'autonomous AI agents',
+    'agentic AI framework', 'TypeScript AI framework', 'open source AI agents',
+    'cognitive memory', 'HEXACO personality', 'multi-agent orchestration',
+    'AI guardrails', 'prompt injection defense', 'voice AI agents',
+    'RAG memory', 'browser automation', 'social media automation',
+    'LLM providers', 'agent skills', 'agent extensions',
+    'WhatsApp bot', 'Telegram bot', 'Discord bot',
+    'LangGraph alternative', 'CrewAI alternative', 'AgentOS',
+    'graph orchestration', 'AI workflow automation', 'self-hosted AI',
   ],
   authors: [{ name: 'Rabbit Hole Inc', url: 'https://rabbithole.inc' }],
   openGraph: {
