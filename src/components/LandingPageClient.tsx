@@ -81,7 +81,7 @@ const FEATURES = [
   },
   {
     title: 'Unlimited Memory',
-    desc: 'Multi-tier RAG: working memory, long-term semantic, episodic timeline, GraphRAG entity relationships, and shared agency memory.',
+    desc: '7 vector backends with auto-scaling from SQLite to Qdrant. Observational compression (3-10x), temporal reasoning, self-improving consolidation. 10 document loaders with multimodal extraction.',
     color: 'var(--cyan)',
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -851,7 +851,7 @@ export function LandingPageClient() {
           </h2>
           <p className="text-[var(--text-secondary)] text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
             An open-source framework for deploying <span className="text-[var(--text-primary)] font-semibold">autonomous AI agents</span> that
-            have real personalities, unlimited memory, browser automation, and can operate across 37 messaging
+            have real personalities, unlimited memory (7 vector backends, observational compression, 10 document loaders), browser automation, and can operate across 37 messaging
             channels — all secured with a 5-tier prompt injection defense pipeline.
           </p>
         </div>
@@ -944,7 +944,7 @@ export function LandingPageClient() {
               <div className="output">  LLM Provider: openai (gpt-4o)</div>
               <div className="output">  Personality: Analytical</div>
               <div className="output">  Voice: OpenAI TTS (nova) + Whisper STT</div>
-              <div className="output">  RAG Memory: hybrid + auto-ingest</div>
+              <div className="output">  RAG Memory: 7 backends + observational compression</div>
               <div className="mt-2"><span className="comment"># Test voice synthesis</span></div>
               <div><span className="prompt">$</span> <span className="cmd">wunderland</span> <span className="flag">voice test</span> <span className="string">&quot;Hello from Wunderland&quot;</span></div>
               <div className="output">  TTS: openai (tts-1, voice: nova)  ✓ ready</div>
@@ -1004,8 +1004,8 @@ export function LandingPageClient() {
               </h2>
               <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-6">
                 37 messaging channels. 21 LLM providers. 23+ tools. 40 curated skills.
-                Browser automation with Playwright. CAPTCHA solving. Proxy rotation.
-                Voice synthesis. Deep research. Email intelligence. And a Planning Engine that ties it all together.
+                7 vector backends with auto-scaling. Observational memory compression. 10 document loaders.
+                Browser automation with Playwright. CAPTCHA solving. Voice synthesis. And a Planning Engine that ties it all together.
               </p>
               <div className="space-y-2 text-sm font-mono">
                 <div className="text-[var(--text-tertiary)]">
@@ -1026,9 +1026,9 @@ export function LandingPageClient() {
               {[
                 { n: '37', label: 'Messaging\nChannels', color: 'var(--primary-light)' },
                 { n: '21', label: 'LLM\nProviders', color: 'var(--accent)' },
-                { n: '23+', label: 'Built-in\nTools', color: 'var(--emerald)' },
+                { n: '7', label: 'Vector\nBackends', color: 'var(--emerald)' },
                 { n: '40', label: 'Curated\nSkills', color: 'var(--cyan)' },
-                { n: '5', label: 'Security\nTiers', color: 'var(--rose)' },
+                { n: '10', label: 'Doc\nLoaders', color: 'var(--rose)' },
                 { n: '8', label: 'Agent\nPresets', color: 'var(--primary-light)' },
               ].map((item) => (
                 <div key={item.label} className="glass-card p-4 text-center">
@@ -1052,7 +1052,7 @@ export function LandingPageClient() {
               <span className="gradient-text">Skills & Extensions</span>
             </h2>
             <p className="text-[var(--text-secondary)] text-base max-w-2xl mx-auto leading-relaxed">
-              40 curated skills, 37 messaging channels, 21 LLM providers, and 23+ tools — all open-source and composable.
+              40 curated skills, 37 messaging channels, 21 LLM providers, 7 vector backends, and 10 document loaders — all open-source and composable.
             </p>
           </div>
           <CatalogBrowser />
