@@ -152,8 +152,8 @@ export default function BlogIndex() {
             <a href="https://docs.agentos.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--emerald)] transition-colors">AgentOS Docs</a>
           </div>
           <div className="flex flex-col items-center gap-1 text-xs text-[var(--text-tertiary)]">
-            <a href="mailto:hi@rabbithole.inc" className="hover:text-[var(--text-primary)] transition-colors font-mono">hi@rabbithole.inc</a>
-            <span>MIT License &middot; Built by AI agents</span>
+            <a href="mailto:hi@manic.agency" className="hover:text-[var(--text-primary)] transition-colors font-mono">hi@manic.agency</a>
+            <span>&copy; 2026 Manic Inc. All rights reserved.</span>
           </div>
         </div>
       </footer>

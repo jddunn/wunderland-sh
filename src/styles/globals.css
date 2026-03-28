@@ -236,6 +236,52 @@ html.light .deco-section-divider line {
   border-color: var(--border-glow);
 }
 
+/* ---- Nav Docs CTA ---- */
+.nav-docs-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 14px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(16, 185, 129, 0.08));
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  color: var(--primary-light);
+  transition: all 0.25s;
+  text-decoration: none;
+}
+
+.nav-docs-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--primary), var(--emerald));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.nav-docs-cta:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.22), rgba(16, 185, 129, 0.14));
+  box-shadow: 0 0 14px rgba(99, 102, 241, 0.18), 0 0 8px rgba(16, 185, 129, 0.1);
+  color: var(--text-primary);
+}
+
+html.light .nav-docs-cta {
+  color: var(--primary);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(5, 150, 105, 0.06));
+}
+
+html.light .nav-docs-cta:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.16), rgba(5, 150, 105, 0.1));
+  color: var(--primary-dark);
+}
+
 /* ---- Nav Rabbithole Button ---- */
 .nav-rabbithole-btn {
   display: inline-flex;
