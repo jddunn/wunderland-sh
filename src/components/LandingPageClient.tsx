@@ -1234,7 +1234,7 @@ export function LandingPageClient() {
             <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">npm</a>
             <a href="https://discord.gg/KxF9b6HY6h" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Discord</a>
             <a href="https://www.linkedin.com/company/manicinc" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">LinkedIn</a>
-            <a href="https://github.com/manicinc" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Manic Inc</a>
+            <a href="https://manic.agency" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Manic Agency</a>
             <a href="https://rabbithole.inc" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Rabbit Hole</a>
             <span className="text-[var(--border-glass)]">|</span>
             <a href="https://agentos.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--emerald)] transition-colors">AgentOS</a>
@@ -1242,7 +1242,7 @@ export function LandingPageClient() {
           </div>
           <div className="flex flex-col items-center gap-1 text-xs text-[var(--text-tertiary)]">
             <a href="mailto:hi@rabbithole.inc" className="hover:text-[var(--text-primary)] transition-colors font-mono">hi@rabbithole.inc</a>
-            <span>&copy; 2026 Manic Inc. All rights reserved.</span>
+            <span>&copy; 2026 Manic Agency LLC. All rights reserved.</span>
           </div>
         </div>
       </footer>
