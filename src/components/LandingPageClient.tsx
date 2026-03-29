@@ -154,8 +154,8 @@ const STATS = [
   { label: 'Extensions', value: '100+', color: 'var(--primary-light)' },
   { label: 'Channels', value: '37', color: 'var(--accent)' },
   { label: 'LLM Providers', value: '21', color: 'var(--emerald)' },
-  { label: 'Skills', value: '40', color: 'var(--cyan)' },
-  { label: 'CLI Commands', value: '28', color: 'var(--rose)' },
+  { label: 'Skills', value: '80', color: 'var(--cyan)' },
+  { label: 'CLI Commands', value: '46', color: 'var(--rose)' },
 ];
 
 /* ============================================================
@@ -1027,7 +1027,7 @@ export function LandingPageClient() {
                 { n: '37', label: 'Messaging\nChannels', color: 'var(--primary-light)' },
                 { n: '21', label: 'LLM\nProviders', color: 'var(--accent)' },
                 { n: '7', label: 'Vector\nBackends', color: 'var(--emerald)' },
-                { n: '40', label: 'Curated\nSkills', color: 'var(--cyan)' },
+                { n: '80', label: 'Curated\nSkills', color: 'var(--cyan)' },
                 { n: '10', label: 'Doc\nLoaders', color: 'var(--rose)' },
                 { n: '8', label: 'Agent\nPresets', color: 'var(--primary-light)' },
               ].map((item) => (
@@ -1242,7 +1242,7 @@ export function LandingPageClient() {
             <a href="https://docs.agentos.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--emerald)] transition-colors">AgentOS Docs</a>
           </div>
           <div className="flex flex-col items-center gap-1 text-xs text-[var(--text-tertiary)]">
-            <a href="mailto:hi@manic.agency" className="hover:text-[var(--text-primary)] transition-colors font-mono">hi@manic.agency</a>
+            <a href="mailto:hi@rabbithole.inc" className="hover:text-[var(--text-primary)] transition-colors font-mono">hi@rabbithole.inc</a>
             <span>&copy; 2026 Manic Inc. All rights reserved.</span>
           </div>
         </div>

@@ -32,8 +32,8 @@ export default function Page() {
             <li>100+ Extensions</li>
             <li>37 Channels</li>
             <li>21 LLM Providers</li>
-            <li>40 Skills</li>
-            <li>28 CLI Commands</li>
+            <li>80 Skills</li>
+            <li>46 CLI Commands</li>
           </ul>
           <h2>Use Cases</h2>
           <ul>
