@@ -695,10 +695,10 @@ export function LandingPageClient() {
               className="px-4 py-2 rounded-lg bg-[rgba(99,102,241,0.12)] border border-[rgba(99,102,241,0.25)] text-[var(--primary-light)] hover:bg-[rgba(99,102,241,0.2)] transition-all">
               npm
             </a>
-            <a href="https://app.rabbithole.inc" target="_blank" rel="noopener noreferrer"
-              className="nav-rabbithole-btn">
+            <a href="https://rabbithole.inc" target="_blank" rel="noopener noreferrer"
+              className="nav-rabbithole-btn opacity-50 pointer-events-none cursor-default">
               <RabbitHoleIcon size={18} transparent id="nav-rh" />
-              <span>Try the Web UI</span>
+              <span>App <span className="text-[0.65rem] opacity-70">(Coming Soon)</span></span>
             </a>
             <ThemeToggle />
           </div>
@@ -722,11 +722,10 @@ export function LandingPageClient() {
               <a href="/blog" onClick={closeMobileMenu} className="mobile-menu-link">Blog</a>
               <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="mobile-menu-link">GitHub</a>
               <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="mobile-menu-link">npm</a>
-              <a href="https://app.rabbithole.inc" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}
-                className="mobile-menu-link flex items-center gap-2">
+              <span className="mobile-menu-link flex items-center gap-2 opacity-50 cursor-default">
                 <RabbitHoleIcon size={18} transparent id="mobile-rh" />
-                Try the Web UI
-              </a>
+                App <span className="text-[0.65rem] opacity-70">(Coming Soon)</span>
+              </span>
             </div>
           </div>
         )}
