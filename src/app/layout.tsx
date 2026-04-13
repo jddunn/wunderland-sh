@@ -93,7 +93,7 @@ const jsonLd = [
     logo: 'https://wunderland.sh/icon-512.png',
     sameAs: [
       'https://github.com/jddunn/wunderland',
-      'https://discord.gg/KxF9b6HY6h',
+      'https://discord.gg/3bYhhcrn',
       'https://www.linkedin.com/company/manicinc',
     ],
   },

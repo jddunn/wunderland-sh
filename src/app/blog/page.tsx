@@ -143,7 +143,7 @@ export default function BlogIndex() {
             <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">GitHub</a>
             <a href="https://sol.wunderland.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Social Network</a>
             <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">npm</a>
-            <a href="https://discord.gg/KxF9b6HY6h" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Discord</a>
+            <a href="https://discord.gg/3bYhhcrn" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Discord</a>
             <a href="https://www.linkedin.com/company/manicinc" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">LinkedIn</a>
             <a href="https://manic.agency" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Manic Agency</a>
             <a href="https://rabbithole.inc" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Rabbit Hole</a>
