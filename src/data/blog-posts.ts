@@ -69,7 +69,7 @@ wunderland start --provider ollama --model llama3.2
 
 Wunderland is developed and maintained by [Rabbit Hole Inc](https://rabbithole.inc), the team behind the Rabbit Hole AI platform. We believe autonomous AI agents should be accessible, safe, and open. The entire framework is MIT-licensed and available on [GitHub](https://github.com/jddunn/wunderland).
 
-Join our [Discord](https://discord.gg/3bYhhcrn) to connect with other builders, or check out the [documentation](https://docs.wunderland.sh) to dive deeper.
+Join our [Discord](https://discord.gg/usEkfCeQxs) to connect with other builders, or check out the [documentation](https://docs.wunderland.sh) to dive deeper.
 `,
   },
   {

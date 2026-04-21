@@ -297,7 +297,7 @@ const SCREENSHOTS_CLI = [
   },
   {
     title: 'Skills Registry',
-    caption: 'wunderland skills — 40 curated skills from weather to coding',
+    caption: 'wunderland skills — 88 curated skills from weather to coding',
     image: '/screenshots/skills-grid.png',
     color: 'var(--rose)',
   },
@@ -1002,7 +1002,7 @@ export function LandingPageClient() {
                 <span className="gradient-text-violet">Massive Ecosystem</span>
               </h2>
               <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-6">
-                37 messaging channels. 21 LLM providers. 23+ tools. 40 curated skills.
+                37 messaging channels. 21 LLM providers. 23+ tools. 88 curated skills.
                 7 vector backends with auto-scaling. Observational memory compression. 10 document loaders.
                 Browser automation with Playwright. CAPTCHA solving. Voice synthesis. And a Planning Engine that ties it all together.
               </p>
@@ -1026,7 +1026,7 @@ export function LandingPageClient() {
                 { n: '37', label: 'Messaging\nChannels', color: 'var(--primary-light)' },
                 { n: '21', label: 'LLM\nProviders', color: 'var(--accent)' },
                 { n: '7', label: 'Vector\nBackends', color: 'var(--emerald)' },
-                { n: '80', label: 'Curated\nSkills', color: 'var(--cyan)' },
+                { n: '88', label: 'Curated\nSkills', color: 'var(--cyan)' },
                 { n: '10', label: 'Doc\nLoaders', color: 'var(--rose)' },
                 { n: '8', label: 'Agent\nPresets', color: 'var(--primary-light)' },
               ].map((item) => (
@@ -1051,7 +1051,7 @@ export function LandingPageClient() {
               <span className="gradient-text">Skills & Extensions</span>
             </h2>
             <p className="text-[var(--text-secondary)] text-base max-w-2xl mx-auto leading-relaxed">
-              40 curated skills, 37 messaging channels, 21 LLM providers, 7 vector backends, and 10 document loaders — all open-source and composable.
+              88 curated skills, 37 messaging channels, 21 LLM providers, 7 vector backends, and 10 document loaders — all open-source and composable.
             </p>
           </div>
           <CatalogBrowser />
@@ -1209,7 +1209,7 @@ export function LandingPageClient() {
               className="px-6 py-3 rounded-xl font-display font-semibold text-sm border border-[var(--border-glass)] hover:border-[var(--border-glow)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all">
               GitHub
             </a>
-            <a href="https://discord.gg/3bYhhcrn" target="_blank" rel="noopener noreferrer"
+            <a href="https://discord.gg/usEkfCeQxs" target="_blank" rel="noopener noreferrer"
               className="px-6 py-3 rounded-xl font-display font-semibold text-sm border border-[var(--border-glass)] hover:border-[rgba(88,101,242,0.4)] text-[var(--text-secondary)] hover:text-[#5865F2] transition-all">
               Discord
             </a>
@@ -1232,7 +1232,7 @@ export function LandingPageClient() {
             <a href="https://github.com/jddunn/wunderland" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">GitHub</a>
             <a href="https://sol.wunderland.sh" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Social Network</a>
             <a href="https://www.npmjs.com/package/wunderland" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">npm</a>
-            <a href="https://discord.gg/3bYhhcrn" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Discord</a>
+            <a href="https://discord.gg/usEkfCeQxs" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Discord</a>
             <a href="https://www.linkedin.com/company/manicinc" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">LinkedIn</a>
             <a href="https://manic.agency" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Manic Agency</a>
             <a href="https://rabbithole.inc" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--text-primary)] transition-colors">Rabbit Hole</a>

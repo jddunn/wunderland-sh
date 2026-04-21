@@ -49,7 +49,7 @@ export default function Page() {
           <p>
             <a href="https://docs.wunderland.sh">Documentation</a> |{' '}
             <a href="https://github.com/jddunn/wunderland">GitHub</a> |{' '}
-            <a href="https://discord.gg/3bYhhcrn">Discord</a>
+            <a href="https://discord.gg/usEkfCeQxs">Discord</a>
           </p>
         </div>
       </noscript>
