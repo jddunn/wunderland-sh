@@ -1134,7 +1134,7 @@ export function LandingPageClient() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <a href="https://github.com/framersai/agentos" target="_blank" rel="noopener noreferrer"
+                <a href="https://github.com/framerslab/agentos" target="_blank" rel="noopener noreferrer"
                   className="glass-card p-4 flex items-center gap-3 group">
                   <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-[rgba(16,185,129,0.1)]">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="text-[var(--emerald)]">
@@ -1143,7 +1143,7 @@ export function LandingPageClient() {
                   </div>
                   <div>
                     <div className="font-display font-semibold text-sm text-[var(--text-primary)] group-hover:text-[var(--emerald)] transition-colors">Source Code</div>
-                    <div className="text-[10px] font-mono text-[var(--text-tertiary)]">github.com/framersai/agentos</div>
+                    <div className="text-[10px] font-mono text-[var(--text-tertiary)]">github.com/framerslab/agentos</div>
                   </div>
                 </a>
 

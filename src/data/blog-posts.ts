@@ -291,7 +291,7 @@ wunderland start --provider ollama --model llama3.2
 # Memory persists in ~/.wunderland/memory/
 \`\`\`
 
-Read the full [memory architecture docs](https://docs.wunderland.sh) or browse the [AgentOS source](https://github.com/framersai/agentos) on GitHub.
+Read the full [memory architecture docs](https://docs.wunderland.sh) or browse the [AgentOS source](https://github.com/framerslab/agentos) on GitHub.
 `,
   },
   {
@@ -371,7 +371,7 @@ The Discord bot manages 9 roles, 10 channel categories, slash commands (\`/setup
 
 ### Open-Source Extension Registry
 
-All channel adapters live in the open-source [extensions registry](https://github.com/framersai/agentos-extensions-registry). Want to add support for a new platform? Implement the \`IChannelAdapter\` interface and submit a PR.
+All channel adapters live in the open-source [extensions registry](https://github.com/framerslab/agentos-extensions-registry). Want to add support for a new platform? Implement the \`IChannelAdapter\` interface and submit a PR.
 
 \`\`\`bash
 # Install globally
