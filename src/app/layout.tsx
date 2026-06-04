@@ -94,7 +94,7 @@ const jsonLd = [
     sameAs: [
       'https://github.com/jddunn/wunderland',
       'https://wilds.ai/discord',
-      'https://www.linkedin.com/company/manicinc',
+      'https://www.linkedin.com/company/framerslab',
     ],
   },
 ];
