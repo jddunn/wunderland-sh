@@ -23,7 +23,7 @@ npm run dev
 CUSTOM_DOMAIN=true npm run build
 ```
 
-The build writes the static site to `out/`. `CUSTOM_DOMAIN=true` builds it for the root of wunderland.sh. Without it, a production build puts every path under `/wunderland-sh`, the path GitHub Pages serves a repository from when it has no custom domain ([`next.config.ts`](https://github.com/jddunn/wunderland-sh/blob/master/next.config.ts)).
+The build writes the static site to `out/`. `CUSTOM_DOMAIN=true` builds it for the root of wunderland.sh. Without it, a production build sets Next.js's `basePath` and `assetPrefix` to `/wunderland-sh`, for GitHub Pages without a custom domain ([`next.config.ts`](https://github.com/jddunn/wunderland-sh/blob/master/next.config.ts)).
 
 ## What is where
 

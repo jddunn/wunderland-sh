@@ -32,7 +32,7 @@ CI (job "Build" in [`.github/workflows/ci.yml`](https://github.com/jddunn/wunder
 1. `npm ci`
 2. `npm run build` with `CUSTOM_DOMAIN=true` (`next build`: the static export into `out/`; it type-checks the project and skips ESLint)
 
-The link check ([`links.yml`](https://github.com/jddunn/wunderland-sh/blob/master/.github/workflows/links.yml)) checks the links in the Markdown files at the repository root and under `.github/`.
+The link check ([`links.yml`](https://github.com/jddunn/wunderland-sh/blob/master/.github/workflows/links.yml)) checks, on a pull request, the links into this repository from the Markdown files at the root and under `.github/`. Links to the project's other repositories are checked on pushes to `master`, weekly and on manual dispatch.
 
 `npm run dev` serves the site at `http://localhost:3012`. The repository has no test suite and no lint script.
 

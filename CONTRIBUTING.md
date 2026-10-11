@@ -25,7 +25,7 @@ npm run dev
 | `npm run dev` | Serves the site at `http://localhost:3012` and reloads it when a file changes. |
 | `CUSTOM_DOMAIN=true npm run build` | Builds the static export into `out/` the way CI and the deploy build it. The build type-checks the project and fails on a type error. |
 
-The repository has no test suite and no lint script, and the build skips ESLint (`eslint.ignoreDuringBuilds` in [`next.config.ts`](https://github.com/jddunn/wunderland-sh/blob/master/next.config.ts)). CI ([`ci.yml`](https://github.com/jddunn/wunderland-sh/blob/master/.github/workflows/ci.yml)) runs one job, "Build", on Node 20 for every pull request to `master`: `npm ci`, then the build above. The link check ([`links.yml`](https://github.com/jddunn/wunderland-sh/blob/master/.github/workflows/links.yml)) runs on every pull request too. Maintainers merge a pull request only when both are green.
+The repository has no test suite and no lint script, and the build skips ESLint (`eslint.ignoreDuringBuilds` in [`next.config.ts`](https://github.com/jddunn/wunderland-sh/blob/master/next.config.ts)). CI ([`ci.yml`](https://github.com/jddunn/wunderland-sh/blob/master/.github/workflows/ci.yml)) runs one job, "Build", on Node 20 for every pull request to `master`: `npm ci`, then the build above. The link check ([`links.yml`](https://github.com/jddunn/wunderland-sh/blob/master/.github/workflows/links.yml)) runs on every pull request too: it checks the links into this repository from the Markdown files at the root and under `.github/`. Maintainers merge a pull request only when both are green.
 
 ## Editing the site
 
@@ -48,7 +48,7 @@ Commits follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.
 
 ## Automated review threads
 
-Review bots may review pull requests. Before a pull request merges, every unresolved thread from a bot, including threads GitHub marks as outdated, is settled in one of three ways:
+A review bot (Sourcery) reviews pull requests. Before a pull request merges, every unresolved thread from a bot, including threads GitHub marks as outdated, is settled in one of three ways:
 
 - **Fixed:** reply with the commit that fixes it.
 - **Answered:** reply with the reason, from the code, that it does not apply. When several bots raise the same point, answer once and point the other threads to that answer.
