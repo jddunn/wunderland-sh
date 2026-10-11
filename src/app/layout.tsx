@@ -83,7 +83,6 @@ const jsonLd = [
     isAccessibleForFree: true,
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     codeRepository: 'https://github.com/jddunn/wunderland',
-    aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.8', ratingCount: '35' },
   },
   {
     '@context': 'https://schema.org',

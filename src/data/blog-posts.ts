@@ -13,10 +13,10 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: 'introducing-wunderland-open-source-ai-agent-framework',
     title: 'Introducing Wunderland: The Free Open-Source AI Agent Framework',
-    description: 'Wunderland is a free, MIT-licensed TypeScript framework for deploying autonomous AI agents with personality, unlimited RAG memory, 28 messaging channels, and browser automation. Install with npm and self-host with Ollama.',
+    description: 'Wunderland is a free, Apache-2.0-licensed TypeScript framework for deploying autonomous AI agents with personality, unlimited RAG memory, 28 messaging channels, and browser automation. Install with npm and self-host with Ollama.',
     date: '2025-12-15',
     author: 'Rabbit Hole Inc',
-    tags: ['wunderland', 'open-source', 'AI agents', 'TypeScript', 'MIT license', 'npm', 'framework'],
+    tags: ['wunderland', 'open-source', 'AI agents', 'TypeScript', 'Apache-2.0', 'npm', 'framework'],
     readTime: '8 min',
     content: `
 ## What is Wunderland?
@@ -27,7 +27,7 @@ Wunderland is a free, open-source TypeScript framework for building and deployin
 
 The AI agent ecosystem is exploding, but most frameworks fall into two camps: either too simple (glorified prompt chains) or too complex (enterprise-only, closed-source, expensive). Wunderland sits in the sweet spot:
 
-- **Free and open-source** under the MIT license — use it commercially, fork it, modify it
+- **Free and open-source** under the Apache-2.0 license — use it commercially, fork it, modify it
 - **TypeScript-first** — full type safety, modern tooling, great DX
 - **Self-hostable** — run entirely offline with Ollama, no API keys required
 - **Production-ready** — 5-tier security, HMAC output signing, cost guards, audit logging
@@ -67,7 +67,7 @@ wunderland start --provider ollama --model llama3.2
 
 ### Built by Rabbit Hole Inc
 
-Wunderland is developed and maintained by [Rabbit Hole Inc](https://rabbithole.inc), the team behind the Rabbit Hole AI platform. We believe autonomous AI agents should be accessible, safe, and open. The entire framework is MIT-licensed and available on [GitHub](https://github.com/jddunn/wunderland).
+Wunderland is developed and maintained by [Rabbit Hole Inc](https://rabbithole.inc), the team behind the Rabbit Hole AI platform. We believe autonomous AI agents should be accessible, safe, and open. The entire framework is licensed under Apache-2.0 and available on [GitHub](https://github.com/jddunn/wunderland).
 
 Join our [Discord](https://wilds.ai/discord) to connect with other builders, or check out the [documentation](https://docs.wunderland.sh) to dive deeper.
 `,
@@ -125,7 +125,7 @@ OpenClaw supported 5 messaging platforms. Wunderland supports **28 channels** ac
 
 We debated between contributing upstream and forking. The scope of changes we needed — security architecture, provider abstraction, personality engine, channel system, memory overhaul — would have fundamentally restructured OpenClaw. A clean fork let us move fast while still honoring the original MIT license.
 
-Every line of Wunderland is open-source under the MIT license. We audit the OpenClaw upstream regularly and cherry-pick relevant improvements.
+Every line of Wunderland is open-source under the Apache-2.0 license. We audit the OpenClaw upstream regularly and cherry-pick relevant improvements.
 
 ### Try It Yourself
 

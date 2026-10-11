@@ -147,7 +147,7 @@ export default function BlogPostClient({ post }: { post: BlogPost }) {
           <div className="mt-16 glass-card p-8 text-center">
             <h3 className="font-display-syne font-bold text-xl mb-3">Try Wunderland</h3>
             <p className="text-[var(--text-secondary)] text-sm mb-6 max-w-md mx-auto">
-              Free, open-source, MIT-licensed. Install with npm and deploy your first autonomous AI agent in minutes.
+              Free, open-source, Apache-2.0-licensed. Install with npm and deploy your first autonomous AI agent in minutes.
             </p>
             <div className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-[rgba(99,102,241,0.08)] border border-[rgba(99,102,241,0.2)] mb-4 font-mono text-sm">
               <span className="text-[var(--accent)]">$</span>{' '}
